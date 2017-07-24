@@ -15,10 +15,10 @@
                                 <div class="col-sm-3">
                                     <div class="single-item">
                                         <div class="single-item-header">
-                                            <a href="#"><img src="source/assets/dest/images/products/1.jpg" alt=""></a>
+                                            <a href="#"><img src="source/assets/dest/images/cac tinh mien trung.jpg" alt="" width="270" height="320" ></a>
                                         </div>
                                         <div class="single-item-body">
-                                            <p>Name trip</p>
+                                            <p>cac tinh mien trung</p>
                                         </div>
                                         <div class="single-item-caption">
                                             
