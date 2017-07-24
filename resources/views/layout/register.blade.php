@@ -41,6 +41,15 @@ register
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Confirm Password" name="repassword" type="password" value="">
                                 </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Age" name="age" value="" type="" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Gender" name="gender" value="" type="" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Address" name="address" value="" type="" autofocus>
+                                </div>
                                 <button type="submit" class="btn btn-lg btn-success btn-block">Register</button>
                             </fieldset>
                         </form>
