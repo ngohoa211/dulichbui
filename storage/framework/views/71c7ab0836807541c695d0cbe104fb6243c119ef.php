@@ -12,14 +12,14 @@
                             </div>
 
                             <div class="row">
-                            
+                            <?php $__currentLoopData = $new_trips; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $new_trip): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="col-sm-3">
                                     <div class="single-item">
                                         <div class="single-item-header">
-                                            <a href="#"><img src="source/assets/dest/images/cac tinh mien trung.jpg" alt="" width="270" height="320" ></a>
+                                            <a href="#"><img src="<?php echo e($new_trip->coverimg); ?>" alt="" width="270" height="320" ></a>
                                         </div>
                                         <div class="single-item-body">
-                                            <p>cac tinh mien trung</p>
+                                            <p><?php echo e($new_trip->name); ?></p>
                                         </div>
                                         <div class="single-item-caption">
                                             
@@ -28,8 +28,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                               
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <p><?php echo e($new_trips->links()); ?> </p> 
                             </div>
                         </div> <!-- .beta-trips-list -->
 
