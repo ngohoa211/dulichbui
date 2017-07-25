@@ -6,6 +6,8 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -51,6 +53,9 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'age'=>'required|min:18',
+            'gender'=>'required',
+            'address'=>'required',
         ]);
     }
 
@@ -60,12 +65,20 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
+    protected function create(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+        
+        $user = User::create([
+            'name'      => $request->input('name'),
+            'email'     => $request->input('email'),
+            'password'  => bcrypt($request->input('password')),
+            'age'     => $request->input('age'),
+            'gender'    => $request->input('gender'),
+            'address'  => $request->input('address')
         ]);
+           //auto login after validate form register
+        Auth::login($user, true);
+
+        return redirect()->route('home');
     }
 }

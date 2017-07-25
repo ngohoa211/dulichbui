@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="<?php echo e(config('app.locale')); ?>">
+<html lang="<?php echo e(config('home')); ?>">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Dulichbui</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -69,7 +69,7 @@
             <?php if(Route::has('login')): ?>
                 <div class="top-right links">
                     <?php if(Auth::check()): ?>
-                        <a href="<?php echo e(url('/home')); ?>">Home</a>
+                        <a href="<?php echo e(url('/home')); ?>">Dulichbui</a>
                     <?php else: ?>
                         <a href="<?php echo e(url('/login')); ?>">Login</a>
                         <a href="<?php echo e(url('/register')); ?>">Register</a>
@@ -79,15 +79,13 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Dulichbui
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="https://laravel.com/docs">Home</a>
+                    <a href="https://laracasts.com">Alltrip</a>
+                    <a href="https://laravel-news.com">User page</a>
                 </div>
             </div>
         </div>

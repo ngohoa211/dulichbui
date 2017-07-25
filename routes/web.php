@@ -12,19 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('home',function(){
-	return view('home');})->name('home');
+    return view('home');
+})->name('home');
 
-Route::get('a',function(){
-	return view('header');
-});
-Route::get('login',function(){
-	return view('layout.login');
-})->name('get_login');
-Route::get('register',function(){
-	return view('layout.register');
-})->name('get_register');
-Route::get('logout',function(){
-	return view('home');})->name('logout');
+Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home1');
+Route::post('/register', 'Auth\RegisterController@create')->name('register');
