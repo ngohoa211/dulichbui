@@ -78,11 +78,18 @@
                     <ul class="l-inline ov">
                     @if(Auth::check())
                         <li><a href="{{route('home')}}">Home</a></li>
-                        <li> <a href="#">All trip</a></li>
-                        <li><a href="#">User page</a></li>
+                        <li> <a href="{{route('alltrip')}}">All trip</a></li>
+                        <li><a>User page</a>
+                           <ul class="sub-menu">
+                                <li><a href="{{route('profile')}}">Profile</a></li>
+                                <li><a href="#">List of trips join</a></li>
+                                <li><a href="#">List of trips follow</a></li>
+                                <li><a href="#">List of trips create by me</a></li>
+                            </ul>
+                        </li>
                     @else
                         <li><a href="{{route('home')}}">Home</a></li>
-                        <li><a href="#">All trip</a></li>
+                        <li><a href="{{route('alltrip')}}">All trip</a></li>
                     @endif
                     </ul>
                     <div class="clearfix"></div>
