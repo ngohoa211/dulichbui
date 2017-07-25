@@ -18,3 +18,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/register', 'Auth\RegisterController@create')->name('register');
+Route::get('alltrip', function () {
+    return view('all trip.alltrip');
+});
