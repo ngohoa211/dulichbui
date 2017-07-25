@@ -24,8 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // return view('home');
-        $new_trips=Trip::findTripOrderByCreatAt;
-        return view('home')->with('new_trips',$new_trips)->with('hot_trips',$hot_trips);
+         return view('home');
+        // $new_trips=Trip::findTripOrderByCreatAt;
+        // return view('home')->with('new_trips',$new_trips)->with('hot_trips',$hot_trips);
     }
 }
