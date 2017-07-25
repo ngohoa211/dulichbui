@@ -14,6 +14,7 @@
                             </div>
 
                             <div class="row">
+                            
                                 <div class="col-sm-3">
                                     <div class="single-item">
                                         <div class="single-item-header">
@@ -29,51 +30,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
-                                    <div class="single-item">
-                                        <div class="single-item-header">
-                                            <a href="#"><img src="source/assets/dest/images/products/2.jpg" alt=""></a>
-                                        </div>
-                                        <div class="single-item-body">
-                                            <p>Name trip</p>
-                                        </div>
-                                        <div class="single-item-caption">
-
-                                            <a class="beta-btn primary" href="#">Details <i class="fa fa-chevron-right"></i></a>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="single-item">
-                                        <div class="single-item-header">
-                                            <a href="#"><img src="source/assets/dest/images/products/3.jpg" alt=""></a>
-                                        </div>
-                                        <div class="single-item-body">
-                                            <p class="single-item-title">Name trip</p>
-                                        </div>
-                                        <div class="single-item-caption">
-                                            
-                                            <a class="beta-btn primary" href="#">Details <i class="fa fa-chevron-right"></i></a>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="single-item">
-                                        <div class="single-item-header">
-                                            <a href="#"><img src="source/assets/dest/images/products/3.jpg" alt=""></a>
-                                        </div>
-                                        <div class="single-item-body">
-                                            <p class="single-item-title">Name trip</p>
-                                        </div>
-                                        <div class="single-item-caption">
-                                        
-                                            <a class="beta-btn primary" href="#">Details <i class="fa fa-chevron-right"></i></a>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
+                               
                             </div>
                         </div> <!-- .beta-products-list -->
 

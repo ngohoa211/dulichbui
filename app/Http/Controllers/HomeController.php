@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Trip;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $new_trips=Trip::findTripOrderByCreatAt;
+        return view('home')->with('new_trips',$new_trips)->with('hot_trips',$hot_trips);
     }
 }
