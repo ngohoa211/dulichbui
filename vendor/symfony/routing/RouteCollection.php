@@ -178,6 +178,7 @@ class RouteCollection implements \IteratorAggregate, \Countable
      */
     public function setCondition($condition)
     {
+        
         foreach ($this->routes as $route) {
             $route->setCondition($condition);
         }
