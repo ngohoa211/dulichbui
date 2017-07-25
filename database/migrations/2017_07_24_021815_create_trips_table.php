@@ -16,6 +16,7 @@ class CreateTripsTable extends Migration
         Schema::create('trips', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->integer('cover')->references('id')->on('pictures')->onDelete('cascade');
             $table->datetime('start_date');
             $table->datetime('end_date')->nullable();
             $table->string('place_gather')->nullable();

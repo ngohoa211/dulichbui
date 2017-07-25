@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="beta-products-list">
-                            <h4>New Trip</h4>
+                             <h3>New Trip</h3>
                             <div class="beta-products-details">
                                 <div class="clearfix"></div>
                             </div>
@@ -75,12 +75,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> <!-- .beta-products-list -->
+                        </div> <!-- .beta-trips-list -->
 
                         <div class="space50">&nbsp;</div>
 
                         <div class="beta-products-list">
-                            <h4>Hot Trip</h4>
+                            <h3 class="me">Hot Trip</h3>
                             <div class="beta-products-details">
                                 <div class="clearfix"></div>
                             </div>
@@ -209,7 +209,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> <!-- .beta-products-list -->
+                        </div> <!-- .beta-trips-list -->
                     </div>
                 </div> <!-- end section with sidebar and main content -->
 
