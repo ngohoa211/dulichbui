@@ -30,3 +30,18 @@ Route::get('/profile','UserpageController@getInsert')->name('profile');
 Route::get('/create_new_trip', function () {
     return view('trips.trips_create');
 })->name('create');
+Route::get('/', function () {
+    return view('trips.trips_create');
+})->name('create');
+Route::get('/add_part', function () {
+    return view('trips.parts.add_part');
+})->name('add_part');
+Route::get('/list_join', function () {
+    return view('user_page.allTripJoin');
+})->name('list_join');
+Route::get('/list_follow', function () {
+    return view('user_page.allTripFollow');
+})->name('list_follow');
+Route::get('/list_my_create', function () {
+    return view('user_page.allTripCreate');
+})->name('list_my_create');

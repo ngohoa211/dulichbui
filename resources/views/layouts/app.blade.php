@@ -82,9 +82,9 @@
                         <li><a>User page</a>
                            <ul class="sub-menu">
                                 <li><a href="{{route('profile')}}">Profile</a></li>
-                                <li><a href="#">List of trips join</a></li>
-                                <li><a href="#">List of trips follow</a></li>
-                                <li><a href="#">List of trips create by me</a></li>
+                                <li><a href="{{ route('list_join')}}">List of trips join</a></li>
+                                <li><a href="{{ route('list_follow')}}">List of trips follow</a></li>
+                                <li><a href="{{ route('list_my_create')}}">List of trips create by me</a></li>
                             </ul>
                         </li>
                     @else

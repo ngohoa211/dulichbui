@@ -75,6 +75,7 @@
 										<th>end time</th>
 										<th>Phương tiện</th>
 										<th>Hoạt động</th>
+										<th><a href="{{route('add_part')}}">Add</a></th>
 									</tr>
 								</thead>
 							</table>

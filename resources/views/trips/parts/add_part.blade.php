@@ -7,7 +7,7 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="beta-products-list">
-						<h3> List all trips join </h3>
+						<h3> Add part</h3>
 						<div class="beta-products-details">
 							<div class="clearfix"></div>
 						</div>
