@@ -26,3 +26,7 @@ Route::get('/alltrip', function () {
 })->name('alltrip');
 
 Route::get('/profile','UserpageController@getInsert')->name('profile');
+
+Route::get('/create_new_trip', function () {
+    return view('trips.trips_create');
+})->name('create');
