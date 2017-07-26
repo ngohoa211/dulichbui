@@ -70,7 +70,6 @@
                         </div>
                         <div class="row">
                             {{ $new_trips->links() }}  
-
                          </div>
 
                         </div> <!-- .beta-trips-list -->
