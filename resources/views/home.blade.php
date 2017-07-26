@@ -17,7 +17,7 @@
                             @foreach ($new_trips as $new_trip)
                                 <div class="col-sm-3">
                                     <div class="single-item">
-                                        <div class="single-item-header">
+                                        <div class="single-item-header">                                        
                                             <a href="#"><img src="{{$new_trip->coverimg}}" alt="" width="270" height="320" ></a>
                                         </div>
                                         <div class="single-item-body">
@@ -31,8 +31,13 @@
                                     </div>
                                 </div>
                             @endforeach
-                            {{ $new_trips->links() }}  
+                            
                             </div>
+                            <div class="row">
+                                {{ $new_trips->links() }}  
+
+                            </div>
+                        
                         </div> <!-- .beta-trips-list -->
 
                         <div class="space50">&nbsp;</div>

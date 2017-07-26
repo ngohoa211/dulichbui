@@ -10,7 +10,7 @@ class Trip extends Model
     protected $table='trips';
     public function scopeFindTripOrderByCreatAt($query)
     {
-    	return $query->orderBy('created_at', 'DESC')->simplePaginate(4);
+    	return $query->orderBy('created_at', 'DESC')->paginate(4);
     }
 
     //quan he voi imagine
