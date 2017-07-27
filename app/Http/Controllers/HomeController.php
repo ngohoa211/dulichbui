@@ -24,31 +24,34 @@ class HomeController extends Controller
      */
     public function index()
     {
-         $new_trips=Trip::getTripsOrderByCreatAt();
+         $new_trips=Trip::getAllTripNew();
          foreach ($new_trips as $new_trip) {
              # them anh 
             $new_trip->coverimg = Trip::find($new_trip->id)->coverimg->url;
          }
+         # sap xep theo created_at
+         $v_new_trips=$new_trips->sortByDesc('created_at');
+         $v_new_trips->addlinks($new_trips->links());
+         
 
-         $hot_trips=Trip::getAllTrip();
+         $hot_trips=Trip::getAllTripHot();
          foreach ($hot_trips as $hot_trip) {
              # them anh
             $hot_trip->coverimg = Trip::find($hot_trip->id)->coverimg->url;
          }
+
          foreach ($hot_trips as $hot_trip) {
              # them so luong comment
-            $hot_trip->coverimg = Trip::find($hot_trip->id)->coverimg->url;
+            $hot_trip->num_comment = Trip::find($hot_trip->id)->comments->count();
          }
-         dd(Trip::find(1)->comments);
-         #sap xep theo luong comment
-         $hot_trips=$hot_trips->sortByDesc(function ($element) {
-            return $element->data ? $element->data->num_comment : $element->num_comment;
-        });
-         dd($hot_trips->values()->all());
 
-         
+            #sap xep theo luong comment
+         $v_hot_trips=$hot_trips->sortByDesc('num_comment');
+         $v_hot_trips->addlinks($hot_trips->links());
+
          return view('home')
-         ->with('new_trips',$new_trips);
-         // ->with('hot_trips',$hot_trips);
+         ->with('new_trips',$v_new_trips)
+         ->with('hot_trips',$v_hot_trips); 
+
     }
 }

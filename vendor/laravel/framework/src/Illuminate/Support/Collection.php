@@ -87,7 +87,18 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
     {
         return $this->items;
     }
-
+////////ham viet them de mutipage
+    protected $linkt = null;
+    public function addlinks($alink)
+    {
+        $this->linkt=$alink;
+    }
+    #
+    public function links()
+    {
+        return $this->linkt;
+    }
+////////////////
     /**
      * Get the average value of a given key.
      *

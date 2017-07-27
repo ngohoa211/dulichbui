@@ -34,7 +34,7 @@
                             
                             </div>
                             <div class="row">
-                                {{ $new_trips->links() }}  
+                                {!! $new_trips->links() !!}  
 
                             </div>
                         
@@ -49,14 +49,15 @@
                             </div>
 
                         <div class="row">
-                            @foreach ($new_trips as $new_trip)
+                            @foreach ($hot_trips as $hot_trip)
                                 <div class="col-sm-3">
                                     <div class="single-item">
-                                        <div class="single-item-header">                                        
-                                            <a href="#"><img src="{{$new_trip->coverimg}}" alt="" width="270" height="320" ></a>
+                                        <div class="single-item-header">  
+
+                                            <a href="#"><img src="{{$hot_trip->coverimg}}" alt="" width="270" height="320" ></a>
                                         </div>
                                         <div class="single-item-body">
-                                            <p>{{$new_trip->name}}</p>
+                                            <p>{{$hot_trip->name}}</p>
                                         </div>
                                         <div class="single-item-caption">
                                             
@@ -69,7 +70,7 @@
                             
                         </div>
                         <div class="row">
-                            {{ $new_trips->links() }}  
+                            {!! $hot_trips->links() !!}  
                          </div>
 
                         </div> <!-- .beta-trips-list -->

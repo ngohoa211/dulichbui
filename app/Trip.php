@@ -21,14 +21,19 @@ class Trip extends Model
         return $this->hasMany('App\Comment');
     }
 
-    public function scopeGetTripsOrderByCreatAt($query)
-    {
-        return $query->orderBy('created_at', 'DESC')->paginate(4);
-    }
-
     public function scopeGetAllTrip($query)
     {
-        return $query->paginate(4);
+        return $query->get();
+    }
+
+    public function scopeGetAllTripNew($query)
+    {
+        return $query->paginate(4,['*'], 'new_trips');
+    }
+
+    public function scopeGetAllTripHot($query)
+    {
+        return $query->paginate(4,['*'], 'hot_trips');
     }
 
 }

@@ -21,9 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/register', 'Auth\RegisterController@create')->name('register');
 
 
-Route::get('/alltrip', function () {
-    return view('all trip.alltrip');
-})->name('alltrip');
+Route::get('/alltrip','AllTripController@listAllTrip')->name('alltrip');
 
 Route::get('/profile','UserpageController@getInsert')->name('profile');
 
