@@ -23,7 +23,7 @@ Route::post('/register', 'Auth\RegisterController@create')->name('register');
 
 Route::get('/alltrip','AllTripController@listAllTrip')->name('alltrip');
 
-Route::get('/profile','UserpageController@getInsert')->name('profile');
+Route::get('/profile','UserpageController@getProfile')->name('profile');
 
 Route::get('/create_new_trip', function () {
     return view('trips.trips_create');
@@ -34,12 +34,6 @@ Route::get('/', function () {
 Route::get('/add_part', function () {
     return view('trips.parts.add_part');
 })->name('add_part');
-Route::get('/list_join', function () {
-    return view('user_page.allTripJoin');
-})->name('list_join');
-Route::get('/list_follow', function () {
-    return view('user_page.allTripFollow');
-})->name('list_follow');
-Route::get('/list_my_create', function () {
-    return view('user_page.allTripCreate');
-})->name('list_my_create');
+Route::get('/list_join','UserpageController@listTripJoin')->name('list_join');
+Route::get('/list_follow', 'UserpageController@listTripFolow')->name('list_follow');
+Route::get('/list_my_create', 'UserpageController@listTripCreate')->name('list_my_create');

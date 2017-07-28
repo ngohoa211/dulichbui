@@ -36,4 +36,20 @@ class Trip extends Model
         return $query->paginate(4,['*'], 'hot_trips');
     }
 
+    public function scopeListTripByCollectionID($query,$collectIDs)
+    {
+        $trips =  array();
+
+        foreach ($collectIDs as $collectID) {
+            # tim phan tu trip va add vao
+            $trip= Trip::find($collectID->id);
+            array_push($trips,$trip);
+
+        }
+        if (empty($trips)) {
+        // list is empty.
+            return 'list is empty';
+        }
+        return  $trips;
+    }
 }
