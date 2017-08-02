@@ -50,6 +50,11 @@ class User extends Authenticatable
         return $this->hasOne('App\Picture');
     }
     //////////////////
+    public function comments()
+    {
+
+        return $this->hasMany('App\Comment');
+    }
     public function scopeListJoinTrips()
     {
         $join_trips= Trip::listTripByCollectionID($this->joinTrips);
