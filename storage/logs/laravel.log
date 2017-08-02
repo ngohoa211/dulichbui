@@ -5709,3 +5709,9 @@ Stack trace:
 [2017-07-28 04:08:05] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected 'endif' (T_ENDIF)' in C:\xampp\htdocs\dulichbui\storage\framework\views\2c3ebccedab5bb1904e6461dfd72adc4dc3169d9.php:43
 Stack trace:
 #0 {main}  
+[2017-07-31 01:05:42] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Maximum execution time of 30 seconds exceeded' in C:\xampp\htdocs\dulichbui\vendor\laravel\framework\src\Illuminate\View\Middleware\ShareErrorsFromSession.php:10
+Stack trace:
+#0 {main}  
+[2017-07-31 04:33:58] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected ''js/trips/parts/add_part.js); ' (T_CONSTANT_ENCAPSED_STRING)' in C:\xampp\htdocs\dulichbui\storage\framework\views\976e1182dfd4c0c15573d10a0f4e2976f41e1b6e.php:96
+Stack trace:
+#0 {main}  
