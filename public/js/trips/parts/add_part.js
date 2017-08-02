@@ -42,13 +42,13 @@ var v_block = {
 	"html":'<div class="form-group" >'
 				+'<label class="control-label col-sm-2" >Vị trí</label>'
 					+'<div class="col-sm-7">'
-						+'<label class="control-label col-sm-7" id="vitri">Vị tría </label>'
+						+'<label class="control-label col-sm-9" id="vitri">Vị tría </label>'
 					+'</div>'
 				+'</div>'
 			+'<div class="form-group" >'
 			+'<label class="control-label col-sm-2" >Hoạt động</label>'
-					+'<div class="col-sm-7">'
-						+'<button type="button" class="btn btn-default" aria-label="Left Align">'
+					+'<div class="col-sm-9">'
+						+'<button type="button" class="btn btn-default" aria-label="Left Align" id="addhd">'
   							+'<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>'
 						+'</button>'
 					+'</div>'
@@ -75,7 +75,6 @@ var c_event = {
 	//them su kien click cho button add
 	addClickEventForButtonAdd : function addClickEventForButtonAdd(button){
 		button.click(function(){
-			console.log('xoa di');
 		v_map.marker=null;
     	//sau khi click vao button phai click vao map
     	v_map.map.addListener('click', function(event) {
@@ -91,8 +90,12 @@ var c_event = {
     			c_mapping.blockId_number_current=c_mapping.numbers_block;
 
     			v_map.getadress($('#block'+c_mapping.blockId_number_current).find("#vitri"),event.latLng);
+    			c_event.addClickEventForButtonPlush($('#block'+c_mapping.blockId_number_current).find("#addhd"));
     			//them xong. di chuyen button xuong duoi
     			c_mapping.numbers_button--;
+
+    			$("#block"+c_mapping.blockId_number_current).prepend('<button type="button"  class="btn btn-warning" id="delete" >xóa điểm</button>');
+
     			$('#button'+c_mapping.buttonId_number_current).remove();
 	    		c_mapping.buttonId_number_current=c_mapping.buttonId_number_current+1;
 	    		$("#block"+c_mapping.blockId_number_current).append(v_button_add.addButton(c_mapping.buttonId_number_current));
@@ -105,6 +108,35 @@ var c_event = {
     		}); 
 
  		});
+	},
+	addClickEventForButtonPlush : function(button){
+		button.click(function(){
+			button.parent().append(	'<div class="your-order">'
+										+'<div class="form-group" >'
+										+'<label class="control-label col-sm-6" >thời gian bắt đầu:</label>'
+											+'<div class="col-sm-6">'
+												+'<input  class="form-control" name="time_start" >'
+											+'</div>'
+										+'</div>'
+										+'<div class="form-group" >'
+										+'<label class="control-label col-sm-6" >kết thúc vào:</label>'
+											+'<div class="col-sm-6">'
+												+'<input  class="form-control" name="time_end" >'
+											+'</div>'
+										+'</div>'
+										+'<div class="form-group" >'
+										+'<label class="control-label col-sm-6" >Tên hoạt động::</label>'
+											+'<div class="col-sm-6">'
+												+'<input  class="form-control" name="activiti" >'
+											+'</div>'
+										+'</div>'
+									+'</div>');
+		});
+	},
+	addClickEventForButtonDelete : function(button){
+		button.click(function(){
+			button.parent().remove();
+		});
 	}
 }
 
