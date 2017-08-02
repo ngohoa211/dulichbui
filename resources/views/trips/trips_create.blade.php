@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+
 <div class="container">
 	<div id="content" class="space-top-none">
 		<div class="main-content">

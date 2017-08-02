@@ -8,7 +8,7 @@ class Trip extends Model
 {
     //
     protected $table='trips';
-    public function comment()
+    public function comments()
     {
 
         return $this->hasMany('App\Comment');
