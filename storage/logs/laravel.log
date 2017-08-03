@@ -9963,3 +9963,21 @@ Stack trace:
 #43 C:\xampp\htdocs\dulichbui\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #44 C:\xampp\htdocs\dulichbui\public\index.php(54): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #45 {main}  
+[2017-08-03 03:33:00] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Cannot redeclare App\Trip::comments()' in C:\xampp\htdocs\dulichbui\app\Trip.php:23
+Stack trace:
+#0 {main}  
+[2017-08-03 03:33:11] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Cannot redeclare App\Trip::comments()' in C:\xampp\htdocs\dulichbui\app\Trip.php:23
+Stack trace:
+#0 {main}  
+[2017-08-03 03:33:12] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Cannot redeclare App\Trip::comments()' in C:\xampp\htdocs\dulichbui\app\Trip.php:23
+Stack trace:
+#0 {main}  
+[2017-08-03 03:33:12] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Cannot redeclare App\Trip::comments()' in C:\xampp\htdocs\dulichbui\app\Trip.php:23
+Stack trace:
+#0 {main}  
+[2017-08-03 03:33:32] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Cannot redeclare App\Trip::comments()' in C:\xampp\htdocs\dulichbui\app\Trip.php:23
+Stack trace:
+#0 {main}  
+[2017-08-03 03:34:00] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Cannot redeclare App\Trip::comments()' in C:\xampp\htdocs\dulichbui\app\Trip.php:23
+Stack trace:
+#0 {main}  

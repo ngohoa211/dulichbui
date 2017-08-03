@@ -15,6 +15,12 @@ function m_ptbl(mark,element){
 		this.mark=mark;
 		this.element =element;
 }
+//php importent
+// if (preg_match("/\bweb\b/i", "PHP is the web scripting language of choice.")) {
+//     echo "A match was found.";
+// } else {
+//     echo "A match was not found.";
+// }
 // student = new m_part();
 // var s =JSON.stringify(student);
 // $.ajax({
@@ -41,14 +47,43 @@ function m_ptbl(mark,element){
 //         }
 //     });
 var m_arrayPoint = new Array();
-
 var c_mapping = {
 	///doi tuong controller - bang quan ly , mapping giua v_map va v_block 
 	"blockId_number_current": -1,
 	"numbers_block":0,
 	"buttonId_number_current": -1,
 	"button_type":null,
-	"numbers_button":0
+	"numbers_button":0,
+	"prepare" : function(){
+		c_mapping.combineData();
+		c_mapping.namming();
+
+	},
+	"combineData": function(){
+		//them input latitude va longtitude vao cac block
+		for (index = 0; index < m_arrayPoint.length; ++index) {
+			m_arrayPoint[index].element.append('<div class="form-group">'
+    												+'<input type="hidden" class="form-control" name="latitude" value="'+m_arrayPoint[index].mark.getPosition().lat()+'">'
+  												+'</div>'
+  												+'<div class="form-group">'
+    												+'<input type="hidden" class="form-control" name="longtitude" value="'+m_arrayPoint[index].mark.getPosition().lng()+'">'
+  												+'</div>');
+		}
+	},
+	"namming" :function(){
+		//them cac name vao block
+		for (index = 0; index < m_arrayPoint.length; ++index) {
+			// confirm(m_arrayPoint[index].element.attr('id')); .attr("name", "somevalue");
+// 			var div = document.getElementById(divID);
+// $(div).find('input:text, input:password, input:file, select, textarea')
+//         .each(function() {
+//             $(this).val('');
+//         });
+
+
+		}
+	}
+
 }; 
 var v_map = {
 	//doi tuong view. quan ly map
@@ -71,14 +106,14 @@ var v_map = {
 			function (results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
 					if (results[0]) {
-						element.html(results[0].formatted_address);
+						element.val(results[0].formatted_address);
 					} else {
-						element.html("No results");
+						element.val("No results");
 					}
 				} else {
 					if(status==OVER_QUERY_LIMIT)
             			window.alert('Ban nhap qua nhanh. binh tinh!' );
-					else element.html(status);
+					else element.val(status);
 				}
 			});
 		},
@@ -120,20 +155,26 @@ var v_block = {
 
 	"html":'<div class="form-group" >'
 				+'<label class="control-label col-sm-3" >Vị trí</label>'
-					+'<div class="col-sm-7">'
-						+'<label class="control-label col-sm-9" id="vitri">Vị tría </label>'
+					+'<div class="col-sm-9">'
+						+'<input  class="form-control" name="vitri" id="vitri" readonly >'
 					+'</div>'
 				+'</div>'
 			+'<div class="form-group" >'
 				+'<label class="control-label col-sm-3" >Đi đến bằng:</label>'
 					+'<div class="col-sm-6">'
-						+'<input  class="form-control" name="move_by" >'
+						+'<input  class="form-control" name ="moveby" >'
 					+'</div>'
 				+'</div>'
 			+'<div class="form-group" >'
 				+'<label class="control-label col-sm-3" >Đến nơi vào lúc:</label>'
 					+'<div class="col-sm-6">'
-						+'<input  class="form-control" name="start_date" >'
+						+'<input type="datetime-local" class="form-control" name="start_date" >'
+					+'</div>'
+				+'</div>'
+			+'<div class="form-group" >'
+				+'<label class="control-label col-sm-3" >Rời đi vào lúc:</label>'
+					+'<div class="col-sm-6">'
+						+'<input type="datetime-local" class="form-control" name ="end_date" >'
 					+'</div>'
 				+'</div>'
 			+'<div class="form-group" >'
@@ -215,21 +256,21 @@ var c_event = {
 		button.click(function(){
 			button.parent().append(	'<div class="your-order">'
 										+'<div class="form-group" >'
-										+'<label class="control-label col-sm-6" >Thời gian bắt đầu:</label>'
-											+'<div class="col-sm-6">'
-												+'<input  class="form-control" name="time_start" >'
+										+'<label class="control-label col-sm-5" >Thời gian bắt đầu:</label>'
+											+'<div class="col-sm-7">'
+												+'<input type="datetime-local" class="form-control" name="miniplan_time_start" >'
 											+'</div>'
 										+'</div>'
 										+'<div class="form-group" >'
-										+'<label class="control-label col-sm-6" >Thời gian kết thúc:</label>'
-											+'<div class="col-sm-6">'
-												+'<input  class="form-control" name="time_end" >'
+										+'<label class="control-label col-sm-5" >Thời gian kết thúc:</label>'
+											+'<div class="col-sm-7">'
+												+'<input type="datetime-local" class="form-control" name="miniplan_time_end" >'
 											+'</div>'
 										+'</div>'
 										+'<div class="form-group" >'
-										+'<label class="control-label col-sm-6" >Tên hoạt động::</label>'
-											+'<div class="col-sm-6">'
-												+'<input  class="form-control" name="activiti" >'
+										+'<label class="control-label col-sm-5" >Tên hoạt động::</label>'
+											+'<div class="col-sm-7">'
+												+'<input  class="form-control" name="miniplan_activiti" >'
 											+'</div>'
 										+'</div>'
 									+'</div>');
