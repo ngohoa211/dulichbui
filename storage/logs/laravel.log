@@ -9981,3 +9981,12 @@ Stack trace:
 [2017-08-03 03:34:00] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Cannot redeclare App\Trip::comments()' in C:\xampp\htdocs\dulichbui\app\Trip.php:23
 Stack trace:
 #0 {main}  
+[2017-08-04 01:29:15] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Cannot redeclare App\Trip::comments()' in C:\xampp\htdocs\dulichbui\app\Trip.php:23
+Stack trace:
+#0 {main}  
+[2017-08-04 01:29:25] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Cannot redeclare App\Trip::comments()' in C:\xampp\htdocs\dulichbui\app\Trip.php:23
+Stack trace:
+#0 {main}  
+[2017-08-04 01:29:39] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Cannot redeclare App\Trip::comments()' in C:\xampp\htdocs\dulichbui\app\Trip.php:23
+Stack trace:
+#0 {main}  
