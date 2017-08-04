@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')
 
+<script type="text/javascript" src="{{asset('js/jquery-3.2.1.min.js')}}" ></script>
+<script type="text/javascript" src="{{asset('js/trips/parts/add_part.js')}}" ></script>
 <div class="container">
 	<div id="content" class="space-top-none">
 		<div class="main-content">
@@ -12,16 +14,17 @@
 						<div class="beta-products-details">
 							<div class="clearfix"></div>
 						</div>
-						<div class="row">
-							<form action="#" method="post" class="form-horizontal">
-								{{ csrf_field() }}								
+						
+							<form action="#" method="get" class="form-horizontal" id="usrform">
+								{{ csrf_field() }}
+								<div class="row">								
 								<div class="col-sm-6">
 									<h4></h4>
 									<div class="space20">&nbsp;</div>
 									<div class="form-group">
 										<label class="control-label col-sm-2" >Name trip</label>
 										<div class="col-sm-7">
-											<input class="form-control" name="name" value="" />
+											<input class="form-control" name="name_trip" value="" />
 										</div>
 									</div>
 									<div class="form-group">
@@ -42,14 +45,46 @@
 											<input type="timestamp" class="form-control" name="end_date" />
 										</div>
 									</div>
-									<div class="form-group"> 
-										<div class="col-sm-offset-2 col-sm-10">
-											<button type="submit" class="btn btn-default">Create</button>
-											<button type="reset" class="btn btn-default">Cancel</button>
-										</div>
-									</div> 
+									
 								</div>
-							</form>            
+								<div class="col-sm-6">
+								<div class="your-order">
+									<div class="your-order-head"><h5>cover</h5></div>
+									<div class="your-order-body" style="padding: 0px 10px">
+										<div class="your-order-item">
+											<div class="clearfix"></div>
+										</div>
+										<div class="your-order-item">
+
+											cover img
+
+										</div>
+									</div>
+								</div>
+								</div>
+								</div>
+								<hr>
+								<hr>
+								<div class="row">
+								<div class="col-sm-6">
+									<h4>Các chặng</h4>
+									<div class="space20">&nbsp;</div>
+									
+									<div id = "tripinfo">
+									<div class="space20">&nbsp;</div>
+
+										<div class="form-group">
+											<!-- <label class="control-label col-sm-2" >vị trí</label>
+											<div class="col-sm-7">
+												
+											</div> -->
+										</div>
+										
+										
+									</div>
+									
+								</div>
+							            
 							<div class="col-sm-6">
 								<div class="your-order">
 									<div class="your-order-head"><h5>Map</h5></div>
@@ -57,29 +92,27 @@
 										<div class="your-order-item">
 											<div class="clearfix"></div>
 										</div>
-										<div class="your-order-item">
-
-											bản đồ c làm trong này
+										<div class="your-order-item" id="map_canvas" style="height:400px;" >
+											<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiIN-tURp9PZIjXVEuB5dCdmo-iIrh2SM&callback=initMap">
+ 											</script>
 
 										</div>
 									</div>
 								</div>
 							</div>
+							</div>
+							<hr><hr>
+								<div class="form-group"> 
+										<div class="col-sm-offset-2 col-sm-10">
+											<button type="submit" class="btn btn-default" onclick="c_mapping.prepare()">Create</button>
+											<button type="reset" class="btn btn-default">Cancel</button>
+										</div>
+									</div> 
+							</form>            
+							
 							<br>
-							<table class="table table-striped table-bordered table-hover" id="dataTables-example">
-								<thead>
-									<tr align="center">
-										<th>Điểm bắt đầu</th>
-										<th>Điểm kết thúc</th>
-										<th>start time</th>
-										<th>end time</th>
-										<th>Phương tiện</th>
-										<th>Hoạt động</th>
-										<th><a href="{{route('add_part')}}">Add</a></th>
-									</tr>
-								</thead>
-							</table>
-						</div>
+
 					</div>
 				</div> <!-- end section with sidebar and main content -->
 
