@@ -63,23 +63,20 @@ var c_mapping = {
 		//them input latitude va longtitude vao cac block
 		for (index = 0; index < m_arrayPoint.length; ++index) {
 			m_arrayPoint[index].element.append('<div class="form-group">'
-    												+'<input type="hidden" class="form-control" name="latitude" value="'+m_arrayPoint[index].mark.getPosition().lat()+'">'
+    												+'<input type="hidden" class="form-control" id="latitude" value="'+m_arrayPoint[index].mark.getPosition().lat()+'">'
   												+'</div>'
   												+'<div class="form-group">'
-    												+'<input type="hidden" class="form-control" name="longtitude" value="'+m_arrayPoint[index].mark.getPosition().lng()+'">'
+    												+'<input type="hidden" class="form-control" id="longtitude" value="'+m_arrayPoint[index].mark.getPosition().lng()+'">'
   												+'</div>');
 		}
 	},
 	"namming" :function(){
-		//them cac name vao block
+		//them ten block vao name cua cac input . vd: id latitude -> name block1latitude
 		for (index = 0; index < m_arrayPoint.length; ++index) {
-			// confirm(m_arrayPoint[index].element.attr('id')); .attr("name", "somevalue");
-// 			var div = document.getElementById(divID);
-// $(div).find('input:text, input:password, input:file, select, textarea')
-//         .each(function() {
-//             $(this).val('');
-//         });
-
+			// confirm(m_arrayPoint[index].element.attr('id'));
+			m_arrayPoint[index].element.find('input').each(function() {
+           	  $(this).attr("name", m_arrayPoint[index].element.attr("id")+$(this).attr("id"));
+	        });
 
 		}
 	}
@@ -156,25 +153,25 @@ var v_block = {
 	"html":'<div class="form-group" >'
 				+'<label class="control-label col-sm-3" >Vị trí</label>'
 					+'<div class="col-sm-9">'
-						+'<input  class="form-control" name="vitri" id="vitri" readonly >'
+						+'<input  class="form-control" id="vitri" readonly >'
 					+'</div>'
 				+'</div>'
 			+'<div class="form-group" >'
 				+'<label class="control-label col-sm-3" >Đi đến bằng:</label>'
 					+'<div class="col-sm-6">'
-						+'<input  class="form-control" name ="moveby" >'
+						+'<input  class="form-control" id ="moveby" >'
 					+'</div>'
 				+'</div>'
 			+'<div class="form-group" >'
 				+'<label class="control-label col-sm-3" >Đến nơi vào lúc:</label>'
 					+'<div class="col-sm-6">'
-						+'<input type="datetime-local" class="form-control" name="start_date" >'
+						+'<input type="datetime-local" class="form-control" id="start_date" >'
 					+'</div>'
 				+'</div>'
 			+'<div class="form-group" >'
 				+'<label class="control-label col-sm-3" >Rời đi vào lúc:</label>'
 					+'<div class="col-sm-6">'
-						+'<input type="datetime-local" class="form-control" name ="end_date" >'
+						+'<input type="datetime-local" class="form-control" id ="end_date" >'
 					+'</div>'
 				+'</div>'
 			+'<div class="form-group" >'
@@ -253,27 +250,11 @@ var c_event = {
  		});
 	},
 	addClickEventForButtonPlush : function(button){
+		var textareahtml ='<textarea rows="4" cols="50" id="activiti"  form="usrform" style="height: 136px"> </textarea>'
+							
 		button.click(function(){
-			button.parent().append(	'<div class="your-order">'
-										+'<div class="form-group" >'
-										+'<label class="control-label col-sm-5" >Thời gian bắt đầu:</label>'
-											+'<div class="col-sm-7">'
-												+'<input type="datetime-local" class="form-control" name="miniplan_time_start" >'
-											+'</div>'
-										+'</div>'
-										+'<div class="form-group" >'
-										+'<label class="control-label col-sm-5" >Thời gian kết thúc:</label>'
-											+'<div class="col-sm-7">'
-												+'<input type="datetime-local" class="form-control" name="miniplan_time_end" >'
-											+'</div>'
-										+'</div>'
-										+'<div class="form-group" >'
-										+'<label class="control-label col-sm-5" >Tên hoạt động::</label>'
-											+'<div class="col-sm-7">'
-												+'<input  class="form-control" name="miniplan_activiti" >'
-											+'</div>'
-										+'</div>'
-									+'</div>');
+			if(button.parent().find("#activiti").length==0)
+				button.parent().append(textareahtml);
 		});
 	},
 	addClickEventForButtonDelete : function(button){

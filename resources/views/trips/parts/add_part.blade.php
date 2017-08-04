@@ -10,12 +10,12 @@
 				<div class="col-sm-12">
 					<div class="beta-products-list">
 						<div class="beta-products-list">
-						<h3> Create New Trip</h3>
+						<h3> Create part</h3>
 						<div class="beta-products-details">
 							<div class="clearfix"></div>
 						</div>
 						<div class="row">
-							<form action="#" method="post" class="form-horizontal">
+							<form action="#" method="get" class="form-horizontal" id="usrform">
 								{{ csrf_field() }}								
 								<div class="col-sm-6">
 									<h4></h4>
