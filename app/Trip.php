@@ -8,11 +8,6 @@ class Trip extends Model
 {
     //
     protected $table='trips';
-    public function comments()
-    {
-
-        return $this->hasMany('App\Comment');
-    }
 
     //quan he voi imagine
     public function coverimg()

@@ -287,22 +287,6 @@ video {
 max-width:100%;
 height:auto
 }
-
-.video-elastic {
-position:relative;
-padding-bottom:56.25%;
-height:0;
-overflow:hidden
-}
-
-.video-elastic iframe,.video-elastic object,.video-elastic embed,.video-elastic video {
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%
-}
-
 .ov {
 overflow:visible!important
 }
@@ -1880,28 +1864,6 @@ background-color:#f90
 
 
 /* ==========================================================================
-    11. AUDIO
-============================================================================= */
-
-.mejs-audio .mejs-controls{background:#fafafa !important;width:100%}
-.mejs-audio .mejs-controls .mejs-duration,.mejs-audio .mejs-controls .mejs-currenttime{background:#fafafa !important;color:#9f9f9f !important}
-.mejs-audio .mejs-controls{height:44px !important}
-.mejs-audio .mejs-controls div{margin-top:6px!important;}
-.mejs-audio .mejs-controls .mejs-button button{background:none !important;font-size:12px !important}
-.mejs-audio .mejs-controls .mejs-button button:focus{outline:none !important}
-.mejs-audio .mejs-controls .mejs-play button:before{content:"\f04b" !important;color:#505050 !important;font-family:"fontawesome"}
-.mejs-audio .mejs-controls .mejs-pause button:before{content:"\f04c" !important;color:#505050 !important;font-family:"fontawesome"}
-.mejs-audio .mejs-controls .mejs-mute button:before{content:"\f028" !important;color:#505050 !important;font-family:"fontawesome";font-size:15px !important}.mejs-audio .mejs-controls .mejs-unmute button:before{content:"\f026" !important;color:#505050 !important;font-family:"fontawesome";font-size:15px !important}.mejs-audio .mejs-controls .mejs-time-total{background:white !important;height:4px;margin-top:8px !important}
-.mejs-audio .mejs-controls .mejs-time-total span:not(.mejs-time-float){height:4px}
-.mejs-audio .mejs-controls .mejs-time-loaded,.mejs-audio .mejs-controls .mejs-horizontal-volume-total{background:#e9e9e9 !important}
-.mejs-audio .mejs-controls .mejs-time-current,.mejs-audio .mejs-controls .mejs-horizontal-volume-current{background:#58a7c6 !important}
-.mejs-audio .mejs-controls .mejs-time-rail span,.mejs-audio .mejs-controls .mejs-horizontal-volume-slider div{border-radius:0 !important}
-.mejs-audio .mejs-controls .mejs-horizontal-volume-slider{margin-top:1px !important;float: right;
-margin-top: -31px!important;
-}
-.mejs-audio .mejs-controls .mejs-horizontal-volume-slider div{height:4px !important}
-
-/* ==========================================================================
     13.1 ICON CIRCLE
 ============================================================================= */
 
@@ -2247,24 +2209,6 @@ transition:all .2s ease-in-out
 /* ==========================================================================
     15. BETA MEDIA QUERY
 ============================================================================= */
-
-@media only screen and (min-width: 0px) {
-.beta-filter-body li {
-width:100%
-}
-}
-
-@media only screen and (min-width: 768px) {
-.beta-filter-body li {
-width:33.33333%
-}
-}
-
-@media only screen and (min-width: 940px) {
-.beta-filter-body li {
-width:20%
-}
-}
 
 .beta-filter-body a {
 width:100%;
@@ -2918,70 +2862,7 @@ font-size:.92em;
 line-height:1.5em
 }
 
-#payment div.payment_box .wc-credit-card-form-card-number,#payment div.payment_box .wc-credit-card-form-card-expiry,#payment div.payment_box .wc-credit-card-form-card-cvc {
-font-size:1.5em;
-padding:8px;
-background-repeat:no-repeat;
-background-position:right
-}
 
-#payment div.payment_box .wc-credit-card-form-card-number.visa,#payment div.payment_box .wc-credit-card-form-card-expiry.visa,#payment div.payment_box .wc-credit-card-form-card-cvc.visa {
-background-image:url(../images/icons/credit-cards/visa.png)
-}
-
-#payment div.payment_box .wc-credit-card-form-card-number.mastercard,#payment div.payment_box .wc-credit-card-form-card-expiry.mastercard,#payment div.payment_box .wc-credit-card-form-card-cvc.mastercard {
-background-image:url(../images/icons/credit-cards/mastercard.png)
-}
-
-#payment div.payment_box .wc-credit-card-form-card-number.laser,#payment div.payment_box .wc-credit-card-form-card-expiry.laser,#payment div.payment_box .wc-credit-card-form-card-cvc.laser {
-background-image:url(../images/icons/credit-cards/laser.png)
-}
-
-#payment div.payment_box .wc-credit-card-form-card-number.dinersclub,#payment div.payment_box .wc-credit-card-form-card-expiry.dinersclub,#payment div.payment_box .wc-credit-card-form-card-cvc.dinersclub {
-background-image:url(../images/icons/credit-cards/diners.png)
-}
-
-#payment div.payment_box .wc-credit-card-form-card-number.maestro,#payment div.payment_box .wc-credit-card-form-card-expiry.maestro,#payment div.payment_box .wc-credit-card-form-card-cvc.maestro {
-background-image:url(../images/icons/credit-cards/maestro.png)
-}
-
-#payment div.payment_box .wc-credit-card-form-card-number.jcb,#payment div.payment_box .wc-credit-card-form-card-expiry.jcb,#payment div.payment_box .wc-credit-card-form-card-cvc.jcb {
-background-image:url(../images/icons/credit-cards/jcb.png)
-}
-
-#payment div.payment_box .wc-credit-card-form-card-number.amex,#payment div.payment_box .wc-credit-card-form-card-expiry.amex,#payment div.payment_box .wc-credit-card-form-card-cvc.amex {
-background-image:url(../images/icons/credit-cards/amex.png)
-}
-
-#payment div.payment_box .wc-credit-card-form-card-number.discover,#payment div.payment_box .wc-credit-card-form-card-expiry.discover,#payment div.payment_box .wc-credit-card-form-card-cvc.discover {
-background-image:url(../images/icons/credit-cards/discover.png)
-}
-
-#payment div.payment_box span.help {
-font-size:11px;
-line-height:13px;
-font-weight:400
-}
-
-#payment div.payment_box .form-row {
-margin:0 0 1em
-}
-
-#payment div.payment_box p:last-child {
-margin-bottom:0
-}
-
-#payment div.payment_box:after {
-content:"";
-display:block;
-border-right-color:transparent;
-border-left-color:transparent;
-border-top-color:transparent;
-position:absolute;
-top:-3px;
-left:0;
-margin:-1em 0 0 2em
-}
 
 .order_details {
 margin:0 0 1.5em;
@@ -5085,3 +4966,4 @@ border:none;}
 .beta-rotator canvas{width:100%;}
 .beta-rotator {font-family: "Open Sans",sans-serif;}
 .history-slider span {font-family: "Open Sans",sans-serif;}
+ 
