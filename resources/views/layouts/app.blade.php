@@ -7,15 +7,13 @@
     <link rel="stylesheet" title="style" href="source/assets/dest/css/style.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>Dulichbui</title>
+    <title>@yield('title')</title>
+    @yield('style_css')
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  
 </head>
 <body>
     <div id="app">

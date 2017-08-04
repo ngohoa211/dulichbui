@@ -42,6 +42,9 @@ Route::get('/list_my_create', 'UserpageController@listTripCreate')->name('list_m
 
 Route::get('comment','CommentController@get_comment')->name('get.comment');
 Route::post('/comment/{id}','CommentController@post_comment')->name('post.comment');
+Route::get('rep_comment','CommentController@get_rep_comment')->name('get.rep.comment');
+Route::post('/rep_comment/{id}','CommentController@post_rep_comment')->name('post.rep.comment');
+
 
 Route::get('demo', function () {
 	return view('js_demo.demo');
