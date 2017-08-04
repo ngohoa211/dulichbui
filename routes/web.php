@@ -49,3 +49,9 @@ Route::post('/rep_comment/{id}','CommentController@post_rep_comment')->name('pos
 Route::get('demo', function () {
 	return view('js_demo.demo');
 });
+
+Route::post('/test_json',function () {
+	$comment_id = isset($_POST['s']) ? $_POST['s'] : 'xxx';
+	// echo $comment_id; //tra ve object
+	return json_encode($comment_id); //return json
+});

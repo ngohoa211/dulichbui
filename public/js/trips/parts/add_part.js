@@ -1,38 +1,152 @@
 function initMap(){v_map.initMap();};
+
+function m_point(status,mark_start,mark_end,start_date,end_date,activiti,moveby) {
+	    this.status = status, 
+	    this.start_latitude = mark_start.getPosition().lat(),
+	    this.start_longitude = mark_start.getPosition().lng(),
+	    this.end_latitude = mark_end.getPosition().lat(),
+	    this.end_longitude= mark_end.getPosition().lng(),
+	    this.start_date= start_date ,
+	    this.end_date= end_date,
+	    this.activiti= activiti,
+	    this.moveby= moveby
+		};
+function m_ptbl(mark,element){
+		this.mark=mark;
+		this.element =element;
+}
+//php importent
+// if (preg_match("/\bweb\b/i", "PHP is the web scripting language of choice.")) {
+//     echo "A match was found.";
+// } else {
+//     echo "A match was not found.";
+// }
+// student = new m_part();
+// var s =JSON.stringify(student);
+// $.ajax({
+//         type:"post",
+//         url:'/test_json',
+//         dataType:"json",
+//         headers: {
+//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//         },
+//         data: {'s': s} ,
+
+//         success:function(res){
+
+            
+
+//             console.log('su');
+//             console.log(res);
+
+//         },
+//         error: function( req, status, err ) {
+//             console.log( 'Error: ' + err );
+//             console.log( "Status: " + status );
+//             console.log( "Response: " + req );
+//         }
+//     });
+var m_arrayPoint = new Array();
 var c_mapping = {
 	///doi tuong controller - bang quan ly , mapping giua v_map va v_block 
 	"blockId_number_current": -1,
 	"numbers_block":0,
 	"buttonId_number_current": -1,
 	"button_type":null,
-	"numbers_button":0
-}; 
+	"numbers_button":0,
+	"prepare" : function(){
+		c_mapping.combineData();
+		c_mapping.namming();
 
+	},
+	"combineData": function(){
+		//them input latitude va longtitude vao cac block
+		for (index = 0; index < m_arrayPoint.length; ++index) {
+			m_arrayPoint[index].element.append('<div class="form-group">'
+    												+'<input type="hidden" class="form-control" name="latitude" value="'+m_arrayPoint[index].mark.getPosition().lat()+'">'
+  												+'</div>'
+  												+'<div class="form-group">'
+    												+'<input type="hidden" class="form-control" name="longtitude" value="'+m_arrayPoint[index].mark.getPosition().lng()+'">'
+  												+'</div>');
+		}
+	},
+	"namming" :function(){
+		//them cac name vao block
+		for (index = 0; index < m_arrayPoint.length; ++index) {
+			// confirm(m_arrayPoint[index].element.attr('id')); .attr("name", "somevalue");
+// 			var div = document.getElementById(divID);
+// $(div).find('input:text, input:password, input:file, select, textarea')
+//         .each(function() {
+//             $(this).val('');
+//         });
+
+
+		}
+	}
+
+}; 
 var v_map = {
 	//doi tuong view. quan ly map
 	"geocoder" : null,
 	"map":null,
-	"marker":null,
+	"directionsService" :null,
+    "directionsDisplay" :null,
 	"initMap": function initMap() {
 	    this.map = new google.maps.Map(document.getElementById('map_canvas'), {
 	        center: {lat: 21.0245, lng: 105.84117},
 	        zoom: 8
 	    });
 	    this.geocoder = new google.maps.Geocoder();
+	    this.directionsService = new google.maps.DirectionsService;
+        this.directionsDisplay = new google.maps.DirectionsRenderer
+        this.directionsDisplay.setMap(v_map.map);
 		},
 	"getadress" : function getadress(element,latLng){
 		this.geocoder.geocode({'latLng': latLng},
 			function (results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
 					if (results[0]) {
-						element.html(results[0].formatted_address);
+						element.val(results[0].formatted_address);
 					} else {
-						element.html("No results");
+						element.val("No results");
 					}
 				} else {
-					element.html(status);
+					if(status==OVER_QUERY_LIMIT)
+            			window.alert('Ban nhap qua nhanh. binh tinh!' );
+					else element.val(status);
 				}
 			});
+		},
+	"displayAllRoute" : function(m_arrayPoint){
+		 v_map.directionsDisplay.setMap(null);
+		 v_map.directionsDisplay.setMap(v_map.map);
+		var waypts =[];
+		if(m_arrayPoint.length>=2){
+			
+			for (index = 1; index < m_arrayPoint.length-1; ++index) {
+				  waypts.push({
+	        		location: m_arrayPoint[index].mark.getPosition(),
+	        		stopover: true
+	      			});
+				}
+			  v_map.directionsService.route({
+			        origin: m_arrayPoint[0].mark.getPosition(),
+			        destination: m_arrayPoint[m_arrayPoint.length-1].mark.getPosition(),
+			        waypoints: waypts,
+        			optimizeWaypoints: false,
+			        travelMode: 'DRIVING'
+			    }, function(response, status) {
+			        if (status === 'OK') {
+			            v_map.directionsDisplay.setDirections(response);
+			        } else {
+			        	if(status==OVER_QUERY_LIMIT)
+            			window.alert('Ban nhap qua nhanh. binh tinh!' );
+            			else window.alert('Directions request failed due to ' + status);
+          			}
+			    });
+			}else{
+				 v_map.directionsDisplay.setMap(null);
+			}
 		}
 	};
 var v_block = {
@@ -40,15 +154,33 @@ var v_block = {
 	"index": '<div id ="block'+'">',
 
 	"html":'<div class="form-group" >'
-				+'<label class="control-label col-sm-2" >Vị trí</label>'
-					+'<div class="col-sm-7">'
-						+'<label class="control-label col-sm-7" id="vitri">Vị tría </label>'
+				+'<label class="control-label col-sm-3" >Vị trí</label>'
+					+'<div class="col-sm-9">'
+						+'<input  class="form-control" name="vitri" id="vitri" readonly >'
 					+'</div>'
 				+'</div>'
 			+'<div class="form-group" >'
-			+'<label class="control-label col-sm-2" >Hoạt động</label>'
-					+'<div class="col-sm-7">'
-						+'<button type="button" class="btn btn-default" aria-label="Left Align">'
+				+'<label class="control-label col-sm-3" >Đi đến bằng:</label>'
+					+'<div class="col-sm-6">'
+						+'<input  class="form-control" name ="moveby" >'
+					+'</div>'
+				+'</div>'
+			+'<div class="form-group" >'
+				+'<label class="control-label col-sm-3" >Đến nơi vào lúc:</label>'
+					+'<div class="col-sm-6">'
+						+'<input type="datetime-local" class="form-control" name="start_date" >'
+					+'</div>'
+				+'</div>'
+			+'<div class="form-group" >'
+				+'<label class="control-label col-sm-3" >Rời đi vào lúc:</label>'
+					+'<div class="col-sm-6">'
+						+'<input type="datetime-local" class="form-control" name ="end_date" >'
+					+'</div>'
+				+'</div>'
+			+'<div class="form-group" >'
+			+'<label class="control-label col-sm-3" >Hoạt động</label>'
+					+'<div class="col-sm-9">'
+						+'<button type="button" class="btn btn-default" aria-label="Left Align" id="addhd">'
   							+'<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>'
 						+'</button>'
 					+'</div>'
@@ -75,7 +207,6 @@ var c_event = {
 	//them su kien click cho button add
 	addClickEventForButtonAdd : function addClickEventForButtonAdd(button){
 		button.click(function(){
-			console.log('xoa di');
 		v_map.marker=null;
     	//sau khi click vao button phai click vao map
     	v_map.map.addListener('click', function(event) {
@@ -86,25 +217,80 @@ var c_event = {
     				position: event.latLng, 
     				map: v_map.map,
     			});
+    			
+    			///
     			$('#tripinfo').append(v_block.addBlock());
 
     			c_mapping.blockId_number_current=c_mapping.numbers_block;
 
     			v_map.getadress($('#block'+c_mapping.blockId_number_current).find("#vitri"),event.latLng);
+    			c_event.addClickEventForButtonPlush($('#block'+c_mapping.blockId_number_current).find("#addhd"));
     			//them xong. di chuyen button xuong duoi
     			c_mapping.numbers_button--;
+
+    			$("#block"+c_mapping.blockId_number_current).prepend('<button type="button"  class="btn btn-warning" id="delete" >xóa điểm</button>');
+    			c_event.addClickEventForButtonDelete($('#block'+c_mapping.blockId_number_current).find("#delete"));
+    			//them vao model va noi cac diem
+    			var m_pb = new m_ptbl(v_map.marker,$('#block'+c_mapping.blockId_number_current));
+    			m_arrayPoint.push(m_pb);
+    			v_map.displayAllRoute(m_arrayPoint);
+    			//xoa diem do trem map
+    			if(m_arrayPoint.length>1) v_map.marker.setMap(null);
+
     			$('#button'+c_mapping.buttonId_number_current).remove();
 	    		c_mapping.buttonId_number_current=c_mapping.buttonId_number_current+1;
-	    		$("#block"+c_mapping.blockId_number_current).append(v_button_add.addButton(c_mapping.buttonId_number_current));
+	    		$('#tripinfo').append(v_button_add.addButton(c_mapping.buttonId_number_current));
 	    		addClickEventForButtonAdd($('#button'+c_mapping.buttonId_number_current));
+	    		
     		}else{
     			//neu la mot diem da mark. chi thay doi, khong them moi
     			v_map.marker.setPosition(event.latLng);
     			v_map.getadress($('#block'+c_mapping.blockId_number_current).find("#vitri"),event.latLng);
+    			v_map.displayAllRoute(m_arrayPoint);
     		}
     		}); 
 
  		});
+	},
+	addClickEventForButtonPlush : function(button){
+		button.click(function(){
+			button.parent().append(	'<div class="your-order">'
+										+'<div class="form-group" >'
+										+'<label class="control-label col-sm-5" >Thời gian bắt đầu:</label>'
+											+'<div class="col-sm-7">'
+												+'<input type="datetime-local" class="form-control" name="miniplan_time_start" >'
+											+'</div>'
+										+'</div>'
+										+'<div class="form-group" >'
+										+'<label class="control-label col-sm-5" >Thời gian kết thúc:</label>'
+											+'<div class="col-sm-7">'
+												+'<input type="datetime-local" class="form-control" name="miniplan_time_end" >'
+											+'</div>'
+										+'</div>'
+										+'<div class="form-group" >'
+										+'<label class="control-label col-sm-5" >Tên hoạt động::</label>'
+											+'<div class="col-sm-7">'
+												+'<input  class="form-control" name="miniplan_activiti" >'
+											+'</div>'
+										+'</div>'
+									+'</div>');
+		});
+	},
+	addClickEventForButtonDelete : function(button){
+		button.click(function(){
+			var markindex =-1;
+			for (index = 0; index < m_arrayPoint.length; ++index){
+				
+				if(m_arrayPoint[index].element.attr('id')==button.parent().attr('id')){
+					m_arrayPoint[index].mark.setMap(null);
+					markindex= index;
+				}
+			}
+			if(markindex!=-1) m_arrayPoint.splice(markindex, 1);
+			v_map.displayAllRoute(m_arrayPoint);
+			button.parent().remove();
+
+		});
 	}
 }
 
