@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class TripController extends Controller
 {
-    //
+    public function showFormCreateTrip(Request $request){
+      return view('trips.trips_create');
+    }
     public function CreateTrip(Request $request){
     	//create trip then add part
     	//lay ten cac block

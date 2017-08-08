@@ -25,15 +25,11 @@ Route::get('/alltrip','AllTripController@listAllTrip')->name('alltrip');
 
 Route::get('/profile','UserpageController@getProfile')->name('profile');
 
-Route::get('/create_new_trip','TripController@CreateTrip')->name('create_new_trip');
+Route::get('/create_new_trip','TripController@showFormCreateTrip')->name('form_create_trip');
+Route::post('/create_new_trip','TripController@CreateTrip')->name('create_new_trip');
+
 Route::get('/trip_home/plan/{trip_id}', 'TripPageController@showPage')->name('show_trip_plan');
 Route::get('/trip_home/plan/{trip_id}/edit', 'TripPageController@editPlan')->name('edit_trip_plan');
-Route::get('/asd/asc', function () {
-    return view('trips.trips_create');
-})->name('create');
-Route::get('/add_part', function () {
-    return view('trips.parts.add_part');
-})->name('add_part');
 Route::get('/list_join','UserpageController@listTripJoin')->name('list_join');
 Route::get('/list_follow', 'UserpageController@listTripFolow')->name('list_follow');
 Route::get('/list_my_create', 'UserpageController@listTripCreate')->name('list_my_create');

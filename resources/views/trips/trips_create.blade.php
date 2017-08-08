@@ -25,7 +25,7 @@
 								</ul>
 							</div>
 						@endif
-							<form action="{{route('create_new_trip')}}" method="get" class="form-horizontal" id="usrform">
+							<form action="{{route('create_new_trip')}}" method="post" class="form-horizontal" id="usrform">
 								{{ csrf_field() }}
 								<div class="row">								
 								<div class="col-sm-6">
