@@ -15,4 +15,8 @@ class Comment extends Model
       public function trips(){
      	return $this->belongsTo('App\Trip','trip_id','id');
      }
+     public function pictures()
+    {
+        return $this->hasMany('App\Picture');
+    }
 }

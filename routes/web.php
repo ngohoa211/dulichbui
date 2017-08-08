@@ -55,3 +55,7 @@ Route::post('/test_json',function () {
 	// echo $comment_id; //tra ve object
 	return json_encode($comment_id); //return json
 });
+
+
+Route::get('/upload', 'CommentController@uploadForm');
+Route::post('/upload', 'CommentController@storeFiles');
