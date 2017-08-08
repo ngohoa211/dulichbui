@@ -62,13 +62,27 @@ var c_mapping = {
 	"combineData": function(){
 		//them input latitude va longtitude vao cac block
 		for (index = 0; index < m_arrayPoint.length; ++index) {
+			if(m_arrayPoint[index].element.find('#latitude').length==0){
 			m_arrayPoint[index].element.append('<div class="form-group">'
     												+'<input type="hidden" class="form-control" id="latitude" value="'+m_arrayPoint[index].mark.getPosition().lat()+'">'
   												+'</div>'
   												+'<div class="form-group">'
     												+'<input type="hidden" class="form-control" id="longtitude" value="'+m_arrayPoint[index].mark.getPosition().lng()+'">'
   												+'</div>');
+			}else {
+				m_arrayPoint[index].element.find('#latitude').val()=m_arrayPoint[index].mark.getPosition().lat();
+				m_arrayPoint[index].element.find('#longtitude').val()=m_arrayPoint[index].mark.getPosition().lat();
+			}
 		}
+		//them ten cac block vao dau form
+			
+		$('#usrform').prepend('<div class="form-group">'
+    						+'<input type="hidden" class="form-control" id="nameblocks" name="nameblocks" >'
+  							+'</div>');
+		for (index = 0; index < m_arrayPoint.length; ++index) {
+			$('[name="nameblocks"]').val($('[name="nameblocks"]').val()+' '+m_arrayPoint[index].element.attr('id'));
+		}
+
 	},
 	"namming" :function(){
 		//them ten block vao name cua cac input . vd: id latitude -> name block1latitude
@@ -159,19 +173,19 @@ var v_block = {
 			+'<div class="form-group" >'
 				+'<label class="control-label col-sm-3" >Đi đến bằng:</label>'
 					+'<div class="col-sm-6">'
-						+'<input  class="form-control" id ="moveby" >'
+						+'<input  class="form-control" id ="moveby" required>'
 					+'</div>'
 				+'</div>'
 			+'<div class="form-group" >'
 				+'<label class="control-label col-sm-3" >Đến nơi vào lúc:</label>'
 					+'<div class="col-sm-6">'
-						+'<input type="datetime-local" class="form-control" id="start_date" >'
+						+'<input type="datetime-local" class="form-control" id="start_date" required>'
 					+'</div>'
 				+'</div>'
 			+'<div class="form-group" >'
 				+'<label class="control-label col-sm-3" >Rời đi vào lúc:</label>'
 					+'<div class="col-sm-6">'
-						+'<input type="datetime-local" class="form-control" id ="end_date" >'
+						+'<input type="datetime-local" class="form-control" id ="end_date" required>'
 					+'</div>'
 				+'</div>'
 			+'<div class="form-group" >'
@@ -250,7 +264,7 @@ var c_event = {
  		});
 	},
 	addClickEventForButtonPlush : function(button){
-		var textareahtml ='<textarea rows="4" cols="50" id="activiti"  form="usrform" style="height: 136px"> </textarea>'
+		var textareahtml ='<textarea rows="4" cols="50" id="activiti"   form="usrform" style="height: 136px"> </textarea>'
 							
 		button.click(function(){
 			if(button.parent().find("#activiti").length==0)

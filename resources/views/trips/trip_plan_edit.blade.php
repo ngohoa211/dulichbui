@@ -2,7 +2,7 @@
 @section('content')
 
 <script type="text/javascript" src="{{asset('js/jquery-3.2.1.min.js')}}" ></script>
-<script type="text/javascript" src="{{asset('js/trips/parts/add_part.js')}}" ></script>
+<script type="text/javascript" src="{{asset('js/trips/trip_plan_edit.js')}}" ></script>
 <div class="container">
 	<div id="content" class="space-top-none">
 		<div class="main-content">
@@ -10,7 +10,7 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="beta-products-list">
-						<h3> Create New Trip</h3>
+						<h3 id = "name-page"> Create New Trip</h3>
 						<div class="beta-products-details">
 							<div class="clearfix"></div>
 						</div>
@@ -25,7 +25,7 @@
 								</ul>
 							</div>
 						@endif
-							<form action="{{route('create_new_trip')}}" method="get" class="form-horizontal" id="usrform">
+							<form action="/trip_home/plan/{{$trip_id}}/edit" method="get" class="form-horizontal" id="usrform">
 								{{ csrf_field() }}
 								<div class="row">								
 								<div class="col-sm-6">
@@ -113,12 +113,21 @@
 							</div>
 							</div>
 							<hr><hr>
+							@if ($permission == 'owner')
 								<div class="form-group"> 
 										<div class="col-sm-offset-2 col-sm-10">
 											<button type="submit" class="btn btn-default" onclick="c_mapping.prepare()">Create</button>
 											<button type="reset" class="btn btn-default">Cancel</button>
 										</div>
 									</div> 
+							@else
+								<div class="form-group"> 
+										<div class="col-sm-offset-2 col-sm-10">
+											<button type="submit" class="btn btn-default">Create</button>
+											<button type="reset" class="btn btn-default">Cancel</button>
+										</div>
+									</div> 
+							@endif
 							</form>            
 							
 							<br>

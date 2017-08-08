@@ -41,7 +41,7 @@ updated_at  timestamp
             $table->float('end_longitude',16,13);
             $table->datetime('start_date');
             $table->datetime('end_date');
-            $table->string('activiti');
+            $table->string('activiti')->nullable();
             $table->string('move_by');
             $table->timestamps();
         });

@@ -20,6 +20,11 @@ class Trip extends Model
         return $this->hasMany('App\Comment');
     }
 
+    public function parts()
+    {
+        return $this->hasMany('App\Part');
+    }
+
     public function scopeGetAllTrip($query)
     {
         return $query->get();
@@ -51,4 +56,5 @@ class Trip extends Model
         }
         return  $trips;
     }
+    
 }
