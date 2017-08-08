@@ -72,13 +72,17 @@
         </nav>
 <div class="header-bottom"  style="background-color:#000000;">
             <div class="container">
-                <nav class="main-menu">
-                    <ul class="l-inline ov">
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
                     @if(Auth::check())
                         <li><a href="{{route('home')}}">Home</a></li>
                         <li> <a href="{{route('alltrip')}}">All trip</a></li>
-                        <li><a>User page</a>
-                           <ul class="sub-menu">
+                        <li class = "dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        User page
+                        </a>
+                           <ul class="dropdown-menu">
                                 <li><a href="{{route('profile')}}">Profile</a></li>
                                 <li><a href="{{ route('list_join')}}">List of trips join</a></li>
                                 <li><a href="{{ route('list_follow')}}">List of trips follow</a></li>
@@ -91,7 +95,7 @@
                     @endif
                     </ul>
                     <div class="clearfix"></div>
-                </nav>
+                </div>
             </div> <!-- .container -->
         </div> <!-- .header-bottom -->
         @yield('content')

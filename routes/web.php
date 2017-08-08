@@ -28,7 +28,7 @@ Route::get('/profile','UserpageController@getProfile')->name('profile');
 Route::get('/create_new_trip','TripController@CreateTrip')->name('create_new_trip');
 Route::get('/trip_home/plan/{trip_id}', 'TripPageController@showPage')->name('show_trip_plan');
 Route::get('/trip_home/plan/{trip_id}/edit', 'TripPageController@editPlan')->name('edit_trip_plan');
-Route::get('/', function () {
+Route::get('/asd/asc', function () {
     return view('trips.trips_create');
 })->name('create');
 Route::get('/add_part', function () {
