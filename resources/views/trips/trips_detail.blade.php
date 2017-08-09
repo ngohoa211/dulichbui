@@ -10,21 +10,20 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="beta-products-list">
-						<h3> Create New Trip</h3>
+						<h3>Trang nhà</h3>
 						<div class="beta-products-details">
+						<div class="dropdown">
+						  <button class="btn btn-basic dropdown-toggle" type="button" data-toggle="dropdown">Xem...
+						  <span class="caret"></span></button>
+						  <ul class="dropdown-menu">
+						    <li><a href="/trip_home/plan/{{$trip_id}}">Kế Hoạch</a></li>
+						    <li><a href="/trip_home/comment/{{$trip_id}}">Comment</a></li>
+						    <li><a href="{{route('show_member',$trip_id)}}">Danh sách thành viên</a></li>
+						    
+						  </ul>
+						</div>
 							<div class="clearfix"></div>
 						</div>
-						@if(count($errors))
-							<div class="alert alert-danger">
-								<strong>Whoops!</strong> There were some problems with your input.
-								<br/>
-								<ul>
-									@foreach($errors->all() as $error)
-									<li>{{ $error }}</li>
-									@endforeach
-								</ul>
-							</div>
-						@endif
 							<form action="{{route('create_new_trip')}}" method="get" class="form-horizontal" id="usrform">
 								{{ csrf_field() }}
 								<div class="row">								

@@ -18,14 +18,14 @@
                                 <div class="col-sm-3">
                                     <div class="single-item">
                                         <div class="single-item-header">                                        
-                                            <a href="#"><img src="{{$new_trip->coverimg}}" alt="" width="270" height="320" ></a>
+                                            <a href="{{route('show_trip_plan',$new_trip->id)}}"><img src="{{$new_trip->coverimg}}" alt="" width="270" height="320" ></a>
                                         </div>
                                         <div class="single-item-body">
                                             <p>{{$new_trip->name}}</p>
                                         </div>
                                         <div class="single-item-caption">
                                             
-                                            <a class="beta-btn primary" href="#">Details <i class="fa fa-chevron-right"></i></a>
+                                            <a class="beta-btn primary" href="{{route('show_trip_plan',$new_trip->id)}}">Details <i class="fa fa-chevron-right"></i></a>
                                             <div class="clearfix"></div>
                                         </div>
                                     </div>
@@ -54,14 +54,14 @@
                                     <div class="single-item">
                                         <div class="single-item-header">  
 
-                                            <a href="#"><img src="{{$hot_trip->coverimg}}" alt="" width="270" height="320" ></a>
+                                            <a href="{{route('show_trip_plan',$hot_trip->id)}}"><img src="{{$hot_trip->coverimg}}" alt="" width="270" height="320" ></a>
                                         </div>
                                         <div class="single-item-body">
                                             <p>{{$hot_trip->name}}</p>
                                         </div>
                                         <div class="single-item-caption">
                                             
-                                            <a class="beta-btn primary" href="#">Details <i class="fa fa-chevron-right"></i></a>
+                                            <a class="beta-btn primary" href="{{route('show_trip_plan',$hot_trip->id)}}">Details <i class="fa fa-chevron-right"></i></a>
                                             <div class="clearfix"></div>
                                         </div>
                                     </div>

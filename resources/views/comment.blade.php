@@ -16,7 +16,7 @@
             @if($value->father_id == 0)
             <form role="form">
                 <div class="com-form">
-                 <img src="source/assets/dest/images/default_avatar.png" alt="" width="40" height="40" >
+                 <img src="{{asset('source/assets/dest/images/default_avatar.png')}}" alt="" width="40" height="40" >
                  <span style="color: blue"><b>{{$value->user->name}}</b>&nbsp;</span>
                  <small> {{$value->created_at}} </small>&nbsp; <a href="javascript:void(0)" class="rep-a" data-a={{$value->id }}>Reply</a><br>
                  {{$value->content}} 
@@ -66,6 +66,7 @@
         <div class="form-group">
             <label>Images</label>
             <input type="file" name="fImages[]" value="{!! old('fImages') !!}" />
+
         </div>
         @endfor
         <button type="submit" class="btn btn-primary">Post comment</button>

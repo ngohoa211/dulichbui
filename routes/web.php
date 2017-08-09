@@ -34,10 +34,11 @@ Route::get('/list_join','UserpageController@listTripJoin')->name('list_join');
 Route::get('/list_follow', 'UserpageController@listTripFolow')->name('list_follow');
 Route::get('/list_my_create', 'UserpageController@listTripCreate')->name('list_my_create');
 
+Route::get('/trip_home/list_member/{trip_id}', 'TripPageController@show_member')->name('show_member');
 
 
-Route::get('comment','CommentController@get_comment')->name('get.comment');
-Route::post('/comment/{id}','CommentController@post_comment')->name('post.comment');
+Route::get('/trip_home/comment/{trip_id}','CommentController@get_comment')->name('get.comment');
+Route::post('/trip_home/comment/{trip_id}','CommentController@post_comment')->name('post.comment');
 Route::get('rep_comment','CommentController@get_rep_comment')->name('get.rep.comment');
 Route::post('/rep_comment/{id}','CommentController@post_rep_comment')->name('post.rep.comment');
 
