@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use App\Trip;
 use App\Comment;
 use App\Picture;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\UploadedFile;
+use View;
 // class CommentController extends Controller
 // {
     //
@@ -59,42 +61,50 @@ use Illuminate\Http\UploadedFile;
 class CommentController extends Controller
 {
     //
-  public function post_comment(Request $request, $id){
-       // $trip= Trip::find($id);//tìm id của trip hiện đang comment;
-    $image = Input::file('fImages');
-    $file_name = $image[0]->getClientOriginalName();
+  public function post_comment(Request $request,$trip_id){
+       // $trip= Trip::find($id);//tìm id của trip hiện đang commen
     $comment= new Comment;
     $comment->user_id=Auth::user()->id; 
-    $comment->trip_id;
+    $comment->trip_id=$trip_id;
     $comment->content=$request->content;
     $comment->save();
        if(Input::hasFile('fImages')){
-         foreach (Input::file('fImages') as $file) {
+        foreach (Input::file('fImages') as $file) {
         $image = new Picture();
         if(isset($file)){
-        $image->url='source/assets/dest/images/comments/'.$file_name;
+        $image_name=Carbon::now()->format('YmdHs').$file->getClientOriginalName().'.jpg';
+        $image->url='source/assets/dest/images/comments/'.$image_name;
         $image->user_id=Auth::user()->id; 
-        $image->trip_id;
+        $image->trip_id=$trip_id;
         $image->comment_id = $comment->id;
-        $file->move('source/assets/dest/images/comments/',$file);
+        $file->move('source/assets/dest/images/comments/',$image_name);
         $image->save();    
        }
       }
     }
-    $url='source/assets/dest/images/comments/'.$file_name;
+  
     
-   
-    dd($url);
     
-    $url = Picture::where('id',$picture_id)->pluck('status')->last();
+    // $url = Picture::where('id',$picture_id)->pluck('status')->last();
 
 
-    return redirect()->route('get.comment');
+    return redirect()->route('get.comment',$trip_id);
   }
   public function get_comment(Request $request, $trip_id){
     $comment = Comment::where('trip_id',$trip_id)->get();
+    
     $rep_comment =Comment::where('father_id','<>',0)->get();
-    return view('comment',['comment'=>$comment],['rep_comment'=>$rep_comment]);
+    //them url anh vao cac value trong comment
+    foreach ($comment as  $value) {
+      # code...
+       $value->imgs=Comment::find($value->id)->pictures;
+    }
+
+    return View::make('comment')
+    ->with('comment',$comment)
+    ->with('rep_comment',$rep_comment)
+    ->with('trip_id',$trip_id)
+    ;
   }
    public function get_rep_comment(){
     $comment = Comment::all();

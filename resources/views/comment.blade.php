@@ -6,7 +6,6 @@
 <link rel="stylesheet" title="style" href="{{asset('source/assets/dest/css/comment.css')}}">
 @endsection
 @section('content')
-
 <div class="container">
     <div id="content" class="space-top-none">
         <div class="main-content">
@@ -20,7 +19,11 @@
                  <span style="color: blue"><b>{{$value->user->name}}</b>&nbsp;</span>
                  <small> {{$value->created_at}} </small>&nbsp; <a href="javascript:void(0)" class="rep-a" data-a={{$value->id }}>Reply</a><br>
                  {{$value->content}} 
-                 <img src="$part/$filename">
+                 <br>
+                 @foreach($value->imgs as $this_comment_img)
+                 <img src="{{asset($this_comment_img->url)}}" width="200" height="200">
+                
+                 @endforeach
              </div>    
          </form>
         
@@ -57,18 +60,19 @@
  <!-- Comments Form -->
  <div>
     <h4>Comment ...<span class="glyphicon glyphicon-pencil"></span></h4>
-    <form action="{{ route('post.comment', 1) }}" method="POST" role="form"  enctype="multipart/form-data" file="true"  >
+    <form action="{{ route('post.comment',$trip_id) }}" method="post" role="form"  enctype="multipart/form-data" file="true"  >
         <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
         <div class="comment-form">
             <textarea class="form-control" name="content" rows="1" placeholder="Enter Comment here!"></textarea>
         </div>
-        @for($i=1;$i<=2;$i++)
-        <div class="form-group">
-            <label>Images</label>
-            <input type="file" name="fImages[]" value="{!! old('fImages') !!}" />
 
+        <div class="form-group" id="img_fied">
+            <label>Images</label>
+            <button type="button" class="btn btn-default" aria-label="Left Align" id="addimg">'
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
+            <input type="file" name="fImages[]" />
         </div>
-        @endfor
         <button type="submit" class="btn btn-primary">Post comment</button>
     </form>
 </div> 
@@ -84,6 +88,9 @@
             id=$(this).attr("data-a");
             $(".rep-form"+id).slideToggle();
         });
+        $("#addimg").click(function(){
+            $("#img_fied").append('<input type="file" name="fImages[]" />');
+        })
     });
 </script>
 @stop
