@@ -12,7 +12,7 @@ class Trip extends Model
     //quan he voi imagine
     public function coverimg()
     {
-        return $this->hasOne('App\Picture')->where('belong_to','cover');
+        return $this->hasOne('App\Picture')->where('comment_id',null);
     }
     //quan he voi comment
     public function comments()
