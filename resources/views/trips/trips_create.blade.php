@@ -43,7 +43,7 @@
 											<input  class="form-control" name="place_gather" >
 										</div>
 									</div>
-									<div class="form-group">
+									<div class="form-group" type="multipart/form-data" file="true">
 										<label class="control-label col-sm-2" >Thời gian khởi hành</label>
 										<div class="col-sm-7">
 											<input type="datetime-local" class="form-control" name="start_date" />
@@ -55,7 +55,6 @@
 											<input type="datetime-local" class="form-control" name="end_date" />
 										</div>
 									</div>
-									
 								</div>
 								<div class="col-sm-6">
 								<div class="your-order">
@@ -65,9 +64,7 @@
 											<div class="clearfix"></div>
 										</div>
 										<div class="your-order-item">
-
-											cover img
-
+											<input type="file" name="cover" />
 										</div>
 									</div>
 								</div>

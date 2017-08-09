@@ -8,7 +8,19 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="beta-products-list">
-                             <h3>New Trip</h3>
+                            <div class = row>
+                                <div class = "col-md-10">
+                                    <h3>New Trip</h3>
+                                </div>
+                                @if(Auth::check())
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-default" aria-label="Left Align" style="height: 50px">
+                                    <a href="{{route('create_new_trip')}}">Tạo trip mới >></a>
+                                    </button>
+                                </div>
+                                @endif
+                            </div>
+                             
                             <div class="beta-products-details">
                                 <div class="clearfix"></div>
                             </div>
