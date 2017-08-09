@@ -17,6 +17,8 @@ class CreatePicturesTable extends Migration
             $table->increments('id');
             $table->string('url');
             $table->integer('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('trip_id')->references('id')->on('trips')->onDelete('cascade');
+            $table->integer('comment_id')->references('id')->on('comments')->onDelete('cascade');
             $table->timestamps();
         });
     }

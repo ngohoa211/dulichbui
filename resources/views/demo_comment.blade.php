@@ -36,10 +36,13 @@
                    <img src="source/assets/dest/images/default_avatar.png" alt="" width="30" height="30" >
                    <span style="color: blue"><b>{{$val->user->name}}</b>&nbsp;</span>
                    <small> {{$val->created_at}} </small>&nbsp;<br>{{$val->content}}
+                   @if($val->picture_id <> NULL)
+                   {{$val->pictures->url}}
+                   @endif
                </div>
                 
            </form>
-           @endif 
+           @endif
            @endforeach 
             <div class="form-group">
                 <textarea class="form-control" name="content" rows="1" placeholder="Reply Comment here!"></textarea>
@@ -51,23 +54,21 @@
             <button type="submit" class="btn btn-primary">Reply</button>
         </form>
  </div>
-
  @endif
  @endforeach
  <!-- Comments Form -->
  <div>
     <h4>Comment ...<span class="glyphicon glyphicon-pencil"></span></h4>
-    <form action="{{ route('post.comment', 1) }}" method="POST" role="form"  enctype="multipart/form-data" file="true"  >
+    <form action="{{ route('post.comment', 1) }}" method="POST" role="form"  enctype="multipart/form-data" >
         <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
         <div class="comment-form">
             <textarea class="form-control" name="content" rows="1" placeholder="Enter Comment here!"></textarea>
         </div>
-        @for($i=1;$i<=2;$i++)
+
         <div class="form-group">
             <label>Images</label>
-            <input type="file" name="fImages[]" value="{!! old('fImages') !!}" />
+            <input type="file" name="images">
         </div>
-        @endfor
         <button type="submit" class="btn btn-primary">Post comment</button>
     </form>
 </div> 

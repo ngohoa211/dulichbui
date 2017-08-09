@@ -55,3 +55,15 @@ Route::post('/test_json',function () {
 
 Route::get('/upload', 'CommentController@uploadForm');
 Route::post('/upload', 'CommentController@storeFiles');
+
+
+Route::get('uploadfile', function(){
+	return View::make('demo_comment');
+});
+// app/routes.php
+Route::post('handle-form', function()
+{
+ $name = Input::file('book')->getClientOriginalName();
+ Input::file('book')->move('/storage/directory', $name);
+ return 'File was moved.';
+});
