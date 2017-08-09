@@ -27,8 +27,8 @@ class CommentController extends Controller
        $comment->save(); 
         return redirect()->route('get.comment');
   }
-  public function get_comment(){
-    $comment = Comment::all();
+  public function get_comment(Request $request, $trip_id){
+    $comment = Comment::where('trip_id',$trip_id)->get();
     $rep_comment =Comment::where('father_id','<>',0)->get();
     return view('comment',['comment'=>$comment],['rep_comment'=>$rep_comment]);
   }

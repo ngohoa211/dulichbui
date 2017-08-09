@@ -26,7 +26,7 @@ updated_at  timestamp
             $table->integer('father_id')->nullable();
             $table->integer('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('trip_id')->references('id')->on('trips')->onDelete('cascade');
-            $table->integer('picture_id')->nullable()->references('id')->on('pictures')->onDelete('cascade');
+            $table->integer('content')->nullable();
             $table->timestamps();
         });
     }

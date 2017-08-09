@@ -16,7 +16,9 @@ class CreatePicturesTable extends Migration
         Schema::create('pictures', function (Blueprint $table) {
             $table->increments('id');
             $table->string('url');
-            $table->integer('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('user_id')->nullable()->references('id')->on('users')->onDelete('cascade');
+            $table->integer('trip_id')->references('id')->on('trips')->onDelete('cascade');
+            $table->integer('belong_to')->nullable();
             $table->timestamps();
         });
     }

@@ -18,14 +18,14 @@
                                 <div class="col-sm-3">
                                     <div class="single-item">
                                         <div class="single-item-header">                                        
-                                            <a href="#"><img src="{{$trip->coverimg}}" alt="" width="270" height="320" ></a>
+                                            <a href="{{route('show_trip_plan',$trip->id)}}"><img src="{{$trip->coverimg}}" alt="" width="270" height="320" ></a>
                                         </div>
                                         <div class="single-item-body">
                                             <p>{{$trip->name}}</p>
                                         </div>
                                         <div class="single-item-caption">
                                             
-                                            <a class="beta-btn primary" href="#">Details <i class="fa fa-chevron-right"></i></a>
+                                            <a class="beta-btn primary" href="{{route('show_trip_plan',$trip->id)}}">Details <i class="fa fa-chevron-right"></i></a>
                                             <div class="clearfix"></div>
                                         </div>
                                     </div>
