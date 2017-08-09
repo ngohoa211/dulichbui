@@ -35,6 +35,7 @@ class TripController extends Controller
       $trip->end_date=$array_input['end_date'];
       $trip->place_gather=$array_input['place_gather'];
       $trip->save();
+      $imageInput::file('cover');
       $owner_this_trip = new OwnerTrip;
       $owner_this_trip->user_id = Auth::id();
       $owner_this_trip->trip_id = $trip->id;
