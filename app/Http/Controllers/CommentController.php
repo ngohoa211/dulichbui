@@ -18,7 +18,6 @@ class CommentController extends Controller
   public function post_comment(Request $request,$trip_id){
        // $trip= Trip::find($id);//tìm id của trip hiện đang commen
     $comment= new Comment;
-    $comment->father_id=0;
     $comment->user_id=Auth::user()->id; 
     $comment->trip_id=$trip_id;
     $comment->content=$request->content;

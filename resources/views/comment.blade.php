@@ -98,7 +98,7 @@
             $(".rep_img_fied"+id).append('<input type="file" name="repImages[]" />');
         });
         $("#addimg").click(function(){
-            $("#img_fied").append('<input type="file" name="repImages[]" />');
+            $("#img_fied").append('<input type="file" name="fImages[]" />');
         })
     });
 </script>
