@@ -20,15 +20,14 @@
                  <small> {{$value->created_at}} </small>&nbsp; <a href="javascript:void(0)" class="rep-a" data-a={{$value->id }}>Reply</a><br>
                  {{$value->content}} 
                  <br>
-                 @foreach($value->imgs as $this_comment_img)
+                 @foreach( $value->imgs as $this_comment_img)
                  <img src="{{asset($this_comment_img->url)}}" width="200" height="200">
-                
                  @endforeach
              </div>    
          </form>
         
       <!--   Reply comment Form -->
-         <form action="{{route('post.rep.comment',$value->id)}}" method="POST" role="form"  style="width: 30; height: 30; display: none;" class="rep-form{{$value->id }}">
+         <form action="{{url('/rep_comment/'.$trip_id.'/'.$value->id)}}" method="post" role="form"  style="width: 30; height: 30; display: none;" class="rep-form{{$value->id }}" enctype="multipart/form-data" file="true" >
             <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
             <!--  show reply comment -->
             <div  class="rep-form">
@@ -36,7 +35,7 @@
                @if($val->father_id == $value->id)
                <form role="form">
                 <div>
-                   <img src="source/assets/dest/images/default_avatar.png" alt="" width="30" height="30" >
+                   <img src="{{asset('source/assets/dest/images/default_avatar.png')}}" alt="" width="30" height="30" >
                    <span style="color: blue"><b>{{$val->user->name}}</b>&nbsp;</span>
                    <small> {{$val->created_at}} </small>&nbsp;<br>{{$val->content}}
                </div>
@@ -47,9 +46,14 @@
             <div class="form-group">
                 <textarea class="form-control" name="content" rows="1" placeholder="Reply Comment here!"></textarea>
             </div>
-            <div class="form-group">
-                <label>Images</label>
-                <input type="file" name="fImages">
+            <div class="form-group" >
+                <div  class="rep_img_fied{{$value->id}}" >
+                    <label>Images</label>
+                    <button type="button" class="btn btn-default" aria-label="Left Align" >
+                    <a href="javascript:void(0)" class="rep-i" data-a={{$value->id }}>Add</a><br>
+                    </button>
+                    <input type="file" name="repImages[]" />
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">Reply</button>
         </form>
@@ -88,8 +92,13 @@
             id=$(this).attr("data-a");
             $(".rep-form"+id).slideToggle();
         });
+        $(".rep-i").click(function(){
+            id=$(this).attr("data-a");
+            console.log(id);
+            $(".rep_img_fied"+id).append('<input type="file" name="repImages[]" />');
+        });
         $("#addimg").click(function(){
-            $("#img_fied").append('<input type="file" name="fImages[]" />');
+            $("#img_fied").append('<input type="file" name="repImages[]" />');
         })
     });
 </script>

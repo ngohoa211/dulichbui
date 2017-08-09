@@ -39,8 +39,8 @@ Route::get('/trip_home/list_member/{trip_id}', 'TripPageController@show_member')
 
 Route::get('/trip_home/comment/{trip_id}','CommentController@get_comment')->name('get.comment');
 Route::post('/trip_home/comment/{trip_id}','CommentController@post_comment')->name('post.comment');
-Route::get('rep_comment','CommentController@get_rep_comment')->name('get.rep.comment');
-Route::post('/rep_comment/{id}','CommentController@post_rep_comment')->name('post.rep.comment');
+
+Route::post('/rep_comment/{trip_id}/{father_id}','CommentController@post_rep_comment')->name('post.rep.comment');
 
 
 Route::get('demo', function () {
