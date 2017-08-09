@@ -22,7 +22,6 @@
 				                    <th>Điểm tập trung</th>
 							        <th>Ngày tạo</th>
 							        <th>Ngày cập nhật</th>
-				                    <th>delete</th>
 							      </tr>
 							    </thead>
 							    <tbody>
@@ -33,8 +32,7 @@
 							        <td>{{$trip->end_date}}</td>
 							        <td>{{$trip->place_gather}}</td>
 							        <td>{{$trip->created_at}}</td>
-							        <td>{{$trip->updated_at}}</td>
-							        <td><a>delete</a></td>				
+							        <td>{{$trip->updated_at}}</td>			
 							      </tr>
 							 	@endforeach
 							    </tbody>

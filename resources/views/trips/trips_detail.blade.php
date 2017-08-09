@@ -10,20 +10,61 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="beta-products-list">
-						<h3>Trang nhà</h3>
+					<div class="row">
+						<div class="col-sm-1">
+							<div class="dropdown">
+							  <button class="btn btn-basic dropdown-toggle" type="button" data-toggle="dropdown">Xem...
+							  <span class="caret"></span></button>
+							  <ul class="dropdown-menu">
+							    <li><a href="{{url('/trip_home/plan/'.$trip_id)}}">Kế Hoạch</a></li>
+							    <li><a href="{{route('get.comment',$trip_id)}}">Comment</a></li>
+							    <li><a href="{{route('show_member',$trip_id)}}">Danh sách thành viên</a></li>
+
+							  </ul>
+							</div>
+						</div>
+						@if(Auth::check() AND $permission =='watch')
+						<div class="col-sm-1">
+							<button type="button" class="btn btn-success">
+								<a href="{{url('/trip_home/addFolow/'.$trip_id.'/'.Auth::user()->id)}}" style="color: black">Follow</a>
+							</button>
+						</div>
+						<div class="col-sm-1">
+							<button type="button" class="btn btn-success">
+							<a href="{{url('/trip_home/add_request_join/'.$trip_id)}}" style="color: black">Join in</a>
+							</button>
+						</div>
+						@endif
+						@if( $permission =='joined')
+						<div class="col-sm-1">
+							<button type="button" class="btn btn-success">
+							<a href="{{url('/trip_home/quit_trip/'.$trip_id)}}" style="color: black">Quit</a>
+							</button>
+						</div>
+						@endif
+						@if( $permission =='waitting')
+						<div class="col-sm-1">
+							<button type="button" class="btn btn-success">
+							<a href="{{url('/trip_home/delete_request_join/'.$trip_id)}}" style="color: black">Cancel request join in</a>
+							</button>
+						</div>
+						@endif
+						@if( $permission =='folowed')
+						<div class="col-sm-1">
+							<button type="button" class="btn btn-success">
+							<a href="{{url('/trip_home/deleteFollow/'.$trip_id.'/'.Auth::user()->id)}}" style="color: black">Unfolow</a>
+							</button>
+						</div>
+						@endif
+
+					</div>
+						
+						
+						   		
+						
 						<div class="beta-products-details">
-						<div class="dropdown">
-						  <button class="btn btn-basic dropdown-toggle" type="button" data-toggle="dropdown">Xem...
-						  <span class="caret"></span></button>
-						  <ul class="dropdown-menu">
-						    <li><a href="/trip_home/plan/{{$trip_id}}">Kế Hoạch</a></li>
-						    <li><a href="/trip_home/comment/{{$trip_id}}">Comment</a></li>
-						    <li><a href="{{route('show_member',$trip_id)}}">Danh sách thành viên</a></li>
-						    
-						  </ul>
-						</div>
+							<h3>Kế hoạch</h3>
 							<div class="clearfix"></div>
-						</div>
 							<form action="{{route('create_new_trip')}}" method="get" class="form-horizontal" id="usrform">
 								{{ csrf_field() }}
 								<div class="row">								
