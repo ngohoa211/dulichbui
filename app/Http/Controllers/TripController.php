@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\Trip;
 use App\Part;
+use App\User;
+use App\JoinerTrip;
 use App\OwnerTrip;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class TripController extends Controller
@@ -69,5 +72,22 @@ class TripController extends Controller
             $status_part++;
     	}
       return redirect('/trip_home/plan/'.$trip->id);
+    }
+    public function addMember(Request $request,$trip_id,$user_id){
+        $request_join=JoinerTrip::where('user_id',$user_id)->where('agree',0)->first();
+        if($request_join!=null){
+          $request_join->agree=1;
+          $request_join->save();
+        }
+        return redirect()->route('show_member',$trip_id);
+    }
+    public function deleteRequest(Request $request,$trip_id,$user_id){
+        JoinerTrip::where('user_id',$user_id)->where('agree',0)->delete();
+        return redirect()->route('show_member',$trip_id);
+    }
+
+    public function deleteJoiner(Request $request,$trip_id,$user_id){
+        JoinerTrip::where('user_id',$user_id)->where('agree',1)->delete();
+        return redirect()->route('show_member',$trip_id);
     }
 }

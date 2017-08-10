@@ -30,23 +30,25 @@ class TripPageController extends Controller
 
 		foreach ($user_need_joins as $user_need_join) {
 			# 
-			$user=User::find($user_need_join->user_id)->first();
+			$user=User::find($user_need_join->user_id);
 			
-			$user->time_in = $user_need_join->created_at;
 			
 			if($user_need_join->agree==0){		
+				$user->time_in = $user_need_join->updated_at;
 				array_push($watingers,$user);
 				
-			}else{
+			}else if($user_need_join->agree==1){
+				$user->time_request = $user_need_join->created_at;
 				array_push($joiners,$user);
-				dd($user);
 			}
 		}
-		
+		$owner_id=OwnerTrip::where('trip_id',$trip_id)->pluck('user_id')->first();
+		$owner=User::find($owner_id);
 		$permission = $this->getPermission(Auth::id(), $trip_id);
 		return View::make('trips.trip_member')
 						->with('permission',$permission)
 						->with('trip_id',$trip_id)
+						->with('owner',$owner)
 						->with('joiners',$joiners)
 						->with('watingers',$watingers);
 	}
@@ -69,9 +71,45 @@ class TripPageController extends Controller
 		$status = FollowerTrip::where('user_id',$user_id)->where('trip_id', $trip_id)->first(); 
 		if($status != null) return 'folowed';
 
+		return 'watch';
 	}
 	public function editPlan($trip_id){
 
+	}
+	public function addFollow($trip_id,$user_id)
+	{
+
+		$folow= new FollowerTrip;
+		$folow->trip_id=$trip_id;
+		$folow->user_id=$user_id;
+		$folow->save();
+		return redirect()->route('list_follow');
+	}
+	public function addRequestJoin($trip_id)
+	{
+		$join= new JoinerTrip;
+		$join->trip_id=$trip_id;
+		$join->user_id=Auth::id();
+		$join->agree=0;
+		$join->save();
+		return redirect()->route('show_trip_plan',$trip_id);
+	}
+
+	public function deleteFollow($trip_id,$user_id)
+	{
+		FollowerTrip::where('trip_id',$trip_id)->where('user_id',$user_id)->delete();
+		return redirect()->route('show_trip_plan',$trip_id);
+	}
+
+	public function deleteRequestJoin($trip_id)
+	{
+		JoinerTrip::where('trip_id',$trip_id)->where('user_id',Auth::id())->where('agree',0)->delete();
+		return redirect()->route('show_trip_plan',$trip_id);
+	}
+	public function quitTrip($trip_id)
+	{
+		JoinerTrip::where('trip_id',$trip_id)->where('user_id',Auth::id())->where('agree',1)->delete();
+		return redirect()->route('show_trip_plan',$trip_id);
 	}
 
 }

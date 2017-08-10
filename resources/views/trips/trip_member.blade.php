@@ -11,8 +11,8 @@
 						  <button class="btn btn-basic dropdown-toggle" type="button" data-toggle="dropdown">Xem...
 						  <span class="caret"></span></button>
 						  <ul class="dropdown-menu">
-						    <li><a href="/trip_home/plan/{{$trip_id}}">Kế Hoạch</a></li>
-						    <li><a href="/trip_home/comment/{{$trip_id}}">Comment</a></li>
+						    <li><a href="{{url('/trip_home/plan/'.$trip_id)}}">Kế Hoạch</a></li>
+						    <li><a href="{{route('get.comment',$trip_id)}}">Comment</a></li>
 						    <li><a href="{{route('show_member',$trip_id)}}">Danh sách thành viên</a></li>
 						   
 						  </ul>
@@ -20,15 +20,21 @@
 						
 						<div class="beta-products-details">
 							<h3>Danh sách thành viên</h3>
+
 							<div class="clearfix"></div>
-							<h5>các thành viên trong chuyến đi</h5>
+							<h4>Chuyến đi này do {{$owner->name}} quản lý, liên hệ : {{$owner->email}}</h4>
+							<h5>các thành viên khác trong chuyến đi</h5>
 							<table class="table">
 							    <thead>
 							      <tr>
 							        <th>Họ tên</th>
+							        <th>Tuổi</th>
+							        <th>Giới tính</th>
+							        <th>Địa chỉ</th>
+							        <th>Email</th>
 							        <th>Ngày vào</th>
 							        @if($permission =='owner')
-							        <th>Delete</th>
+							        <th class="col-md-2" >Delete</th>
 							        @endif
 							      </tr>
 							    </thead>
@@ -36,9 +42,13 @@
 							    @foreach ($joiners as $joiner)
 							      <tr>
 							        <td>{{$joiner->name}}</td>
+							        <th>{{$joiner->age}}</th>
+							        <th>{{$joiner->gender}}</th>
+							        <th>{{$joiner->address}}</th>
+							        <th>{{$joiner->email}}</th>
 							        <td>{{$joiner->time_in}}</td>
 							        @if($permission =='owner')
-							        <td><a href="#">Delete</a></td>
+							        <td><a href="{{url('/trip_home/list_member/delete_member/'.$trip_id.'/'.$joiner->id)}}">Delete</a></td>
 							         @endif
 							      </tr>
 							      @endforeach
@@ -51,6 +61,10 @@
 							    <thead>
 							      <tr>
 							        <th>Họ tên</th>
+							        <th>Tuổi</th>
+							        <th>Giới tính</th>
+							        <th>Địa chỉ</th>
+							        <th>Email</th>
 							        <th>Ngày gửi đăng kí</th>
 							        @if($permission =='owner')
 							        <th>Delete</th>
@@ -62,10 +76,14 @@
 							    @foreach ($watingers as $watinger)
 							      <tr>
 							        <td>{{$watinger->name}}</td>
-							        <td>{{$watinger->time_in}}</td>
+							        <th>{{$watinger->age}}</th>
+							        <th>{{$watinger->gender}}</th>
+							        <th>{{$watinger->address}}</th>
+							        <th>{{$watinger->email}}</th>
+							        <td>{{$watinger->time_request}}</td>
 							        @if($permission =='owner')
-							        <td><a href="#">Delete</a></td>
-							        <td><a href="#">Accept</a></td>
+							        <td class="col-md-1"><a href="{{url('/trip_home/list_member/delete_request/'.$trip_id.'/'.$watinger->id)}}">Delete</a></td>
+							        <td class="col-md-1"><a href="{{url('/trip_home/list_member/add_mem/'.$trip_id.'/'.$watinger->id)}}">Accept</a></td>
 							         @endif
 							      </tr>
 							      @endforeach

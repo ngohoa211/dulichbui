@@ -46,7 +46,7 @@ class Trip extends Model
 
         foreach ($collectIDs as $collectID) {
             # tim phan tu trip va add vao
-            $trip= Trip::find($collectID->id);
+            $trip= Trip::find($collectID->trip_id);
             array_push($trips,$trip);
 
         }
