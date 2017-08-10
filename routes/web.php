@@ -24,7 +24,8 @@ Route::post('/register', 'Auth\RegisterController@create')->name('register');
 Route::get('/alltrip','AllTripController@listAllTrip')->name('alltrip');
 
 Route::get('/profile','UserpageController@getProfile')->name('profile');
-
+Route::get('/edit_profile','UserpageController@getEditProfile')->name('get.edit.profile');
+Route::post('/edit_profile','UserpageController@postEditProfile')->name('post.edit.profile');
 Route::get('/create_new_trip','TripController@showFormCreateTrip')->name('form_create_trip');
 Route::post('/create_new_trip','TripController@CreateTrip')->name('create_new_trip');
 

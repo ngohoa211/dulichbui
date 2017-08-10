@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-
     <div id="content" class="space-top-none">
         <div class="main-content">
             <div class="space60">&nbsp;</div>
@@ -9,7 +8,6 @@
 
                 <form role="form">
                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-
                     <tbody>
                         <tr>
                             <td>Name</td>
@@ -31,13 +29,77 @@
                             <td>Address</td>
                             <td>{{$profile->address}}</td>
                         </tr>
-
                     </tbody>
-                </form>
-            </div>
+                </table>
+                 <a href="javascript:void(0)" class="edit-a" ><h4>Edit</h4></a><br>
+            </form>   
         </div>
-    </div>
-    
+        <div>
+        <hr>
+        
+            <form action="{{route('post.edit.profile')}}" method="POST" role="form" class="edit-form" style=" display: none;">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+                 <h4>Edit profile</h4>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" >Name:</label>
+                    <div class="col-sm-7">
+                        <input class="form-control"  placeholder="username" name="name" />
+                    </div>
+                </div><br>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" >E-Mail Address:</label>
+                    <div class="col-sm-7">
+                       <input  class="form-control" name="email" placeholder="email address" >
+                   </div>
+               </div><br>
+               <div class="form-group">
+                    <label class="control-label col-sm-3" >Password:</label>
+                    <div class="col-sm-7">
+                       <input type="password" class="form-control" name="password" placeholder="Enter your password" >
+                   </div>
+               </div><br>
+               <div class="form-group">
+                    <label class="control-label col-sm-3" >New Password:</label>
+                    <div class="col-sm-7">
+                       <input type="password" class="form-control" name="newpass" placeholder="Enter new password" >
+                   </div>
+               </div><br>
+               <div class="form-group">
+                 <label class="control-label col-sm-3">Age:</label>
+                 <div class="col-sm-7">
+                    <input class="form-control" placeholder="age" name="age" />
+                </div>
+               </div><br>
+               <div class="form-group">
+                 <label  class="control-label col-sm-3" >Gender:</label>
+                 <div class="col-sm-7">
+                    <input class="form-control" placeholder="gender" name="gender" />
+                </div>
+               </div><br>
+               <div class="form-group">
+                 <label class="control-label col-sm-3">Address:</label>
+                 <div class="col-sm-7">
+                    <input class="form-control" placeholder="address" name="address" />
+                </div>
+               </div><br>
+               <div class="form-group"> 
+                <div class="col-sm-offset-3 col-sm-10">
+                <button type="submit" class="btn btn-primary" >Create</button>
+                    <button type="reset" class="btn btn-default">Cancel</button>
+                </div>
+            </div> 
+        </form>
+        </div>
 </div>
-
+</div>
+</div>
 @stop
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+         
+         $(".edit-a").click(function(){
+            $(".edit-form").slideToggle();
+        });
+        });
+</script>

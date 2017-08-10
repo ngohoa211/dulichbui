@@ -10,6 +10,9 @@
     <div id="content" class="space-top-none">
         <div class="main-content">
             <div class="space60">&nbsp;</div>
+            <!-- Cover of trip -->
+            <img src="{{asset('source/assets/dest/images/related/3.jpg')}}" width="100%" height="300" >
+             <div class="space60">&nbsp;</div>
             <!--  show comment  -->
             @foreach($comment as $value)
             @if($value->father_id == 0)
@@ -20,9 +23,11 @@
                  <small> {{$value->created_at}} </small>&nbsp; <a href="javascript:void(0)" class="rep-a" data-a={{$value->id }}>Reply</a><br>
                  {{$value->content}} 
                  <br>
+                 <div>
                  @foreach( $value->imgs as $this_comment_img)
-                 <img src="{{asset($this_comment_img->url)}}" width="200" height="200">
+                 <img src="{{asset($this_comment_img->url)}}" width="200" height="200">&nbsp;
                  @endforeach
+                 </div>
              </div>    
          </form>
         
@@ -38,8 +43,11 @@
                    <img src="{{asset('source/assets/dest/images/default_avatar.png')}}" alt="" width="30" height="30" >
                    <span style="color: blue"><b>{{$val->user->name}}</b>&nbsp;</span>
                    <small> {{$val->created_at}} </small>&nbsp;<br>{{$val->content}}
-               </div>
-                
+                   <br>
+                   @foreach( $val->img as $rep_comment_img)
+                   <img src="{{asset($rep_comment_img->url)}}" width="200" height="200">&nbsp;
+                   @endforeach
+               </div>             
            </form>
            @endif 
            @endforeach 

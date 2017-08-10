@@ -45,10 +45,12 @@ class CommentController extends Controller
     $rep_comment =Comment::where('father_id','<>',0)->get();
     //them url anh vao cac value trong comment
     foreach ($comment as  $value) {
-      # code...
        $value->imgs=Comment::find($value->id)->pictures;
     }
-
+      //them url anh vao cac value trong rep comment
+      foreach ($rep_comment as  $val) {
+       $val->img=Comment::find($val->id)->pictures;
+    }
     return View::make('comment')
     ->with('comment',$comment)
     ->with('rep_comment',$rep_comment)
