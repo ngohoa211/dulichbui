@@ -32,7 +32,18 @@
                     </tbody>
                 </table>
                  <a href="javascript:void(0)" class="edit-a" ><h4>Edit</h4></a><br>
-            </form>   
+            </form> 
+            @if(count($errors))
+              <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.
+                <br/>
+                <ul>
+                  @foreach($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                  @endforeach
+                </ul>
+              </div>
+            @endif 
         </div>
         <div>
         <hr>
@@ -43,17 +54,11 @@
                 <div class="form-group">
                     <label class="control-label col-sm-3" >Name:</label>
                     <div class="col-sm-7">
-                        <input class="form-control"  placeholder="username" name="name" />
+                        <input class="form-control"  placeholder="username" name="name" value="{{$profile->name}}" />
                     </div>
                 </div><br>
-                <div class="form-group">
-                    <label class="control-label col-sm-3" >E-Mail Address:</label>
-                    <div class="col-sm-7">
-                       <input  class="form-control" name="email" placeholder="email address" >
-                   </div>
-               </div><br>
                <div class="form-group">
-                    <label class="control-label col-sm-3" >Password:</label>
+                    <label class="control-label col-sm-3" >Old Password:</label>
                     <div class="col-sm-7">
                        <input type="password" class="form-control" name="password" placeholder="Enter your password" >
                    </div>
@@ -65,26 +70,32 @@
                    </div>
                </div><br>
                <div class="form-group">
+                    <label class="control-label col-sm-3" >Confirm new password:</label>
+                    <div class="col-sm-7">
+                       <input type="password" class="form-control" name="confirm_newpass" placeholder="Confirm new password" >
+                   </div>
+               </div><br>
+               <div class="form-group">
                  <label class="control-label col-sm-3">Age:</label>
                  <div class="col-sm-7">
-                    <input class="form-control" placeholder="age" name="age" />
+                    <input class="form-control" placeholder="age" name="age" value="{{$profile->age}}" />
                 </div>
                </div><br>
                <div class="form-group">
                  <label  class="control-label col-sm-3" >Gender:</label>
                  <div class="col-sm-7">
-                    <input class="form-control" placeholder="gender" name="gender" />
+                    <input class="form-control" placeholder="gender" name="gender" value="{{$profile->gender}}" />
                 </div>
                </div><br>
                <div class="form-group">
                  <label class="control-label col-sm-3">Address:</label>
                  <div class="col-sm-7">
-                    <input class="form-control" placeholder="address" name="address" />
+                    <input class="form-control" placeholder="address" name="address" value="{{$profile->address}}" />
                 </div>
                </div><br>
                <div class="form-group"> 
                 <div class="col-sm-offset-3 col-sm-10">
-                <button type="submit" class="btn btn-primary" >Create</button>
+                <button type="submit" class="btn btn-primary" >Edit</button>
                     <button type="reset" class="btn btn-default">Cancel</button>
                 </div>
             </div> 

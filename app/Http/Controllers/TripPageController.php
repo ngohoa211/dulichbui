@@ -22,8 +22,6 @@ class TripPageController extends Controller
 		return view('trips.trips_detail',['permission'=>$permission],['trip_id'=>$trip_id]);
 	}
 	public function show_member($trip_id){
-
-		
 		$joiners = array();
 		$watingers = array();
 		$user_need_joins = JoinerTrip::where('trip_id', $trip_id)->get();
@@ -52,26 +50,27 @@ class TripPageController extends Controller
 						->with('joiners',$joiners)
 						->with('watingers',$watingers);
 	}
-	public function getPermission($user_id, $trip_id)
-	{
+	public function getPermission($user_id, $trip_id){
 		//moi user chi co duy nhat 1 vai tro! : owner, wating, joined, folow, watch && guess chi co duy nhat la watch
+		$permission= array();
 		if(Auth::guest())
-			return 'watch';
+			array_push ( $permission,'watch');
 
 		$status = OwnerTrip::where('user_id',$user_id)->where('trip_id', $trip_id)->first();
 		if($status != null)
-			return 'owner';
-
+			array_push ($permission,'owner');
+		
 		$status = JoinerTrip::where('user_id',$user_id)->where('trip_id', $trip_id)->first(); 
 		if($status != null){
-			if($status->agree==0 ) return 'waitting';
-			else return 'joined';
+			if($status->agree==0 ) array_push ( $permission,'waitting');
+			else array_push ( $permission,'joined');
 		}
+
 		//sap xep return the nay se khien cho muon bo fowlow thi phai out khoi nhom truoc. 
 		$status = FollowerTrip::where('user_id',$user_id)->where('trip_id', $trip_id)->first(); 
-		if($status != null) return 'folowed';
-
-		return 'watch';
+		if($status != null) array_push ( $permission,'folowed');
+		array_push ($permission,'watch');
+		return $permission;
 	}
 	public function editPlan($trip_id){
 
@@ -95,9 +94,9 @@ class TripPageController extends Controller
 		return redirect()->route('show_trip_plan',$trip_id);
 	}
 
-	public function deleteFollow($trip_id,$user_id)
+	public function deleteFollow($trip_id)
 	{
-		FollowerTrip::where('trip_id',$trip_id)->where('user_id',$user_id)->delete();
+		FollowerTrip::where('trip_id',$trip_id)->where('user_id',Auth::id())->delete();
 		return redirect()->route('show_trip_plan',$trip_id);
 	}
 

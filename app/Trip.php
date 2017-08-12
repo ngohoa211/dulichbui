@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Trip extends Model
 {
@@ -32,12 +33,25 @@ class Trip extends Model
 
     public function scopeGetAllTripNew($query)
     {
-        return $query->paginate(4,['*'], 'new_trips');
+        return $query->join('pictures', 'trips.id', '=', 'pictures.trip_id')
+        ->where('pictures.comment_id',null)
+        ->select('trips.id','name','url')
+        ->orderBy('trips.created_at', 'DESC')
+        ->paginate(4,['*'], 'new_trips');
     }
 
     public function scopeGetAllTripHot($query)
     {
-        return $query->paginate(4,['*'], 'hot_trips');
+        // $query_count_comment = DB::table('comments')
+        //         ->select('trip_id', DB::raw('count(*) as num'))
+        //          ->groupBy('trip_id');
+        return $query->leftJoin('pictures', 'trips.id', '=', 'pictures.trip_id')
+        ->leftJoin('comments','trips.id', '=','comments.trip_id')
+        ->where('pictures.comment_id',null)
+        ->select('trips.id','name','url',DB::raw('count(*) as num'))
+        ->groupBy('trips.id','name','url')
+        ->orderBy('num', 'DESC')
+        ->paginate(4,['*'], 'hot_trips');
     }
 
     public function scopeListTripByCollectionID($query,$collectIDs)

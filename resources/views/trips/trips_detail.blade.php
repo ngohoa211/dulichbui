@@ -19,43 +19,57 @@
 							    <li><a href="{{url('/trip_home/plan/'.$trip_id)}}">Kế Hoạch</a></li>
 							    <li><a href="{{route('get.comment',$trip_id)}}">Comment</a></li>
 							    <li><a href="{{route('show_member',$trip_id)}}">Danh sách thành viên</a></li>
-
 							  </ul>
 							</div>
 						</div>
-						@if(Auth::check() AND $permission =='watch')
-						<div class="col-sm-1">
-							<button type="button" class="btn btn-success">
-								<a href="{{url('/trip_home/addFolow/'.$trip_id.'/'.Auth::user()->id)}}" style="color: black">Follow</a>
-							</button>
-						</div>
-						<div class="col-sm-1">
-							<button type="button" class="btn btn-success">
-							<a href="{{url('/trip_home/add_request_join/'.$trip_id)}}" style="color: black">Join in</a>
-							</button>
-						</div>
+						@if(Auth::check())
+							@if(in_array("watch",$permission))
+								@if( (in_array("folowed",$permission)==false))
+								<div class="col-sm-1">
+									<button type="button" class="btn btn-success">
+										<a href="{{url('/trip_home/addFolow/'.$trip_id.'/'.Auth::user()->id)}}" style="color: black">Follow</a>
+									</button>
+								</div>
+								@endif
+								@if((in_array("owner",$permission)==false) 
+									AND (in_array("joined",$permission)==false) 
+									AND (in_array("waitting",$permission)==false))
+								<div class="col-sm-1">
+									<button type="button" class="btn btn-success">
+									<a href="{{url('/trip_home/add_request_join/'.$trip_id)}}" style="color: black">Join in</a>
+									</button>
+								</div>
+								@endif
+							@endif
+							@if(in_array("joined",$permission))
+							<div class="col-sm-1">
+								<button type="button" class="btn btn-success">
+								<a href="{{url('/trip_home/quit_trip/'.$trip_id)}}" style="color: black">Quit</a>
+								</button>
+							</div>
+							@endif
+							@if(in_array("waitting",$permission))
+							<div class="col-sm-2">
+								<button type="button" class="btn btn-success">
+								<a href="{{url('/trip_home/delete_request_join/'.$trip_id)}}" style="color: black">Cancel request join in</a>
+								</button>
+							</div>
+							@endif
+							@if(in_array("folowed",$permission))
+							<div class="col-sm-1">
+								<button type="button" class="btn btn-success">
+								<a href="{{url('/trip_home/deleteFollow/'.$trip_id)}}" style="color: black">Unfolow</a>
+								</button>
+							</div>
+							@endif
+							@if(in_array("owner",$permission))
+							<div class="col-sm-3">
+								<h5>(Chuyến này do bạn quản lý)</h5>
+							</div>
+							@endif
 						@endif
-						@if( $permission =='joined')
-						<div class="col-sm-1">
-							<button type="button" class="btn btn-success">
-							<a href="{{url('/trip_home/quit_trip/'.$trip_id)}}" style="color: black">Quit</a>
-							</button>
-						</div>
-						@endif
-						@if( $permission =='waitting')
-						<div class="col-sm-1">
-							<button type="button" class="btn btn-success">
-							<a href="{{url('/trip_home/delete_request_join/'.$trip_id)}}" style="color: black">Cancel request join in</a>
-							</button>
-						</div>
-						@endif
-						@if( $permission =='folowed')
-						<div class="col-sm-1">
-							<button type="button" class="btn btn-success">
-							<a href="{{url('/trip_home/deleteFollow/'.$trip_id.'/'.Auth::user()->id)}}" style="color: black">Unfolow</a>
-							</button>
-						</div>
-						@endif
+						
+						
 
 					</div>
 						

@@ -11,7 +11,7 @@
         <div class="main-content">
             <div class="space60">&nbsp;</div>
             <!-- Cover of trip -->
-            <img src="{{asset('source/assets/dest/images/related/3.jpg')}}" width="100%" height="300" >
+            <!-- <img src="{{asset('source/assets/dest/images/related/3.jpg')}}" width="100%" height="300" > -->
              <div class="space60">&nbsp;</div>
             <!--  show comment  -->
             @foreach($comment as $value)

@@ -27,7 +27,7 @@
 							    <tbody>
 							    @foreach($list as $trip)
 							      <tr>
-							        <td>{{$trip->name}}</td>
+							        <td><a href="{{route('show_trip_plan',$trip->id)}}">{{$trip->name}}</a></td>
 							        <td>{{$trip->start_date}}</td>
 							        <td>{{$trip->end_date}}</td>
 							        <td>{{$trip->place_gather}}</td>

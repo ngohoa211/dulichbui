@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Trip;
 use App\Part;
 use App\User;
+use App\Picture;
 use App\JoinerTrip;
 use App\OwnerTrip;
 use Carbon\Carbon;
@@ -29,7 +30,14 @@ class TripController extends Controller
                 'start_date.required' => ' Không được bỏ trống thời gian dự kiến bắt đầu ',
                 'end_date.required' => ' Không được bỏ trống thời gian dự kiến kết thúc '
           ]);
-    	$array_input=Input::all();
+        if($request->file('cover')==null) return redirect()->back()->withInput()->withErrors(['needimg' => 'cover is requied']);
+
+
+         
+             
+         
+        
+      $array_input=Input::all();
     	$blocks=explode(" ",$array_input['nameblocks']);
 		//////////////////
       $trip = new Trip;
@@ -38,12 +46,15 @@ class TripController extends Controller
       $trip->end_date=$array_input['end_date'];
       $trip->place_gather=$array_input['place_gather'];
       $trip->save();
-      $imageInput::file('cover');
+
+      
+
       $owner_this_trip = new OwnerTrip;
       $owner_this_trip->user_id = Auth::id();
       $owner_this_trip->trip_id = $trip->id;
       $owner_this_trip->save();
-      $status_part = 1;
+
+      $status_part = 0;
     	foreach ($blocks as $block) {
     		# 
             $part = new Part;
@@ -56,14 +67,11 @@ class TripController extends Controller
             
             $part ->status = $status_part;
             $part ->name = $matches[$block.'vitri'];
-            $part ->start_latitude = $matches[$block.'latitude'];
-            $part ->start_longitude = $matches[$block.'longtitude'];
-            $part ->end_latitude = $matches[$block.'latitude'];
-            $part ->end_longitude = $matches[$block.'longtitude']; 
+            $part ->latitude = $matches[$block.'latitude'];
+            $part ->longitude = $matches[$block.'longtitude'];
             $part ->start_date = $matches[$block.'start_date'];
             $part ->end_date = $matches[$block.'end_date'];
             $part ->move_by = $matches[$block.'moveby'];
-                            
             $part->trip_id=$trip->id;
             if(array_key_exists ($block.'activiti', $matches )==false){
                 $part->activiti = null;
@@ -71,6 +79,15 @@ class TripController extends Controller
             $part->save();
             $status_part++;
     	}
+      $file = $request->file('cover');
+      $image = new Picture();
+      $image_name=Carbon::now()->format('YmdHs').$file->getClientOriginalName();
+      $image->url='source/assets/dest/images/products/'.$image_name;
+      $image->user_id=Auth::user()->id; 
+      $image->trip_id=$trip->id;
+      $file->move('source/assets/dest/images/products/',$image_name);
+      $image->save();
+
       return redirect('/trip_home/plan/'.$trip->id);
     }
     public function addMember(Request $request,$trip_id,$user_id){
