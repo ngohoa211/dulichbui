@@ -25,7 +25,8 @@
 								</ul>
 							</div>
 						@endif
-							<form action="{{route('create_new_trip')}}" method="post" class="form-horizontal" id="usrform">
+							<form action="{{route('create_new_trip')}}" method="post" class="form-horizontal" 
+							id="usrform" enctype="multipart/form-data" file="true" >
 								{{ csrf_field() }}
 								<div class="row">								
 								<div class="col-sm-6">
@@ -43,7 +44,7 @@
 											<input  class="form-control" name="place_gather" >
 										</div>
 									</div>
-									<div class="form-group" type="multipart/form-data" file="true">
+									<div class="form-group" >
 										<label class="control-label col-sm-2" >Thời gian khởi hành</label>
 										<div class="col-sm-7">
 											<input type="datetime-local" class="form-control" name="start_date" />
@@ -64,7 +65,9 @@
 											<div class="clearfix"></div>
 										</div>
 										<div class="your-order-item">
-											<input type="file" name="cover" />
+											<div class="form-group">
+												<input type="file" name="cover" />
+											</div>
 										</div>
 									</div>
 								</div>
@@ -128,6 +131,17 @@
 		</div> <!-- #content -->
 	</div> <!-- .container -->
 </div>
-
+<script type="text/javascript">
+	$( document ).ready(function() {
+//sau khi tai xong. thuc hien:
+	//add button 
+	c_mapping.buttonId_number_current=1;
+	$('#tripinfo').append(v_button_add.addButton(c_mapping.buttonId_number_current));
+	c_mapping.buttonId_number_current=c_mapping.numbers_button;
+	c_mapping.button_type = 'add';
+	//add su kien click vao button
+	c_event.addClickEventForButtonAdd($('#button'+c_mapping.buttonId_number_current));
+	});
+</script>
 
 @stop

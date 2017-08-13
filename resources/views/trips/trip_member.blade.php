@@ -22,7 +22,11 @@
 							<h3>Danh sách thành viên</h3>
 
 							<div class="clearfix"></div>
+							@if($owner==null)
+							<h4>Chuyến đi hiện không có ai quản lý</h4>
+							@else
 							<h4>Chuyến đi này do {{$owner->name}} quản lý, liên hệ : {{$owner->email}}</h4>
+							@endif
 							<h5>các thành viên khác trong chuyến đi</h5>
 							<table class="table">
 							    <thead>
@@ -33,7 +37,7 @@
 							        <th>Địa chỉ</th>
 							        <th>Email</th>
 							        <th>Ngày vào</th>
-							        @if($permission =='owner')
+							        @if(in_array("owner",$permission))
 							        <th class="col-md-2" >Delete</th>
 							        @endif
 							      </tr>
@@ -47,7 +51,7 @@
 							        <th>{{$joiner->address}}</th>
 							        <th>{{$joiner->email}}</th>
 							        <td>{{$joiner->time_in}}</td>
-							        @if($permission =='owner')
+							        @if(in_array("owner",$permission))
 							        <td><a href="{{url('/trip_home/list_member/delete_member/'.$trip_id.'/'.$joiner->id)}}">Delete</a></td>
 							         @endif
 							      </tr>
@@ -66,7 +70,7 @@
 							        <th>Địa chỉ</th>
 							        <th>Email</th>
 							        <th>Ngày gửi đăng kí</th>
-							        @if($permission =='owner')
+							        @if(in_array("owner",$permission))
 							        <th>Delete</th>
 							        <th>Accept</th>
 							        @endif
@@ -81,7 +85,7 @@
 							        <th>{{$watinger->address}}</th>
 							        <th>{{$watinger->email}}</th>
 							        <td>{{$watinger->time_request}}</td>
-							        @if($permission =='owner')
+							        @if(in_array("owner",$permission))
 							        <td class="col-md-1"><a href="{{url('/trip_home/list_member/delete_request/'.$trip_id.'/'.$watinger->id)}}">Delete</a></td>
 							        <td class="col-md-1"><a href="{{url('/trip_home/list_member/add_mem/'.$trip_id.'/'.$watinger->id)}}">Accept</a></td>
 							         @endif

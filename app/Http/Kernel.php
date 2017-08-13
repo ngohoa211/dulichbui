@@ -56,5 +56,8 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'check_exist_trip'=>\App\Http\Middleware\CheckExistTrip::class,
+        'check_is_owner'=>\App\Http\Middleware\CheckIsOwner::class,
+        'check_exist_comment_father'=>\App\Http\Middleware\CheckExistCommentFather::class,
     ];
 }

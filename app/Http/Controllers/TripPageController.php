@@ -18,12 +18,12 @@ use View;
 class TripPageController extends Controller
 {
 	public function showPage($trip_id){
+		$trip=Trip::getTripAndCover($trip_id);
+		
 		$permission = $this->getPermission(Auth::id(), $trip_id);
-		return view('trips.trips_detail',['permission'=>$permission],['trip_id'=>$trip_id]);
+		return view('trips.trips_detail',['permission'=>$permission],['trip'=>$trip]);
 	}
 	public function show_member($trip_id){
-
-		
 		$joiners = array();
 		$watingers = array();
 		$user_need_joins = JoinerTrip::where('trip_id', $trip_id)->get();
@@ -52,52 +52,60 @@ class TripPageController extends Controller
 						->with('joiners',$joiners)
 						->with('watingers',$watingers);
 	}
-	public function getPermission($user_id, $trip_id)
-	{
+	public function getPermission($user_id, $trip_id){
 		//moi user chi co duy nhat 1 vai tro! : owner, wating, joined, folow, watch && guess chi co duy nhat la watch
+		$permission= array();
 		if(Auth::guest())
-			return 'watch';
+			array_push ( $permission,'watch');
 
 		$status = OwnerTrip::where('user_id',$user_id)->where('trip_id', $trip_id)->first();
 		if($status != null)
-			return 'owner';
-
+			array_push ($permission,'owner');
+		
 		$status = JoinerTrip::where('user_id',$user_id)->where('trip_id', $trip_id)->first(); 
 		if($status != null){
-			if($status->agree==0 ) return 'waitting';
-			else return 'joined';
+			if($status->agree==0 ) array_push ( $permission,'waitting');
+			else array_push ( $permission,'joined');
 		}
+
 		//sap xep return the nay se khien cho muon bo fowlow thi phai out khoi nhom truoc. 
 		$status = FollowerTrip::where('user_id',$user_id)->where('trip_id', $trip_id)->first(); 
-		if($status != null) return 'folowed';
-
-		return 'watch';
+		if($status != null) array_push ( $permission,'folowed');
+		array_push ($permission,'watch');
+		return $permission;
 	}
 	public function editPlan($trip_id){
-
+		dd($trip_id);
 	}
-	public function addFollow($trip_id,$user_id)
+	public function addFollow($trip_id)
 	{
-
-		$folow= new FollowerTrip;
-		$folow->trip_id=$trip_id;
-		$folow->user_id=$user_id;
-		$folow->save();
-		return redirect()->route('list_follow');
+		if(FollowerTrip::where('trip_id',$trip_id)->where('user_id',Auth::id())->first()!=null)
+			return redirect()->route('home');
+		else{
+			$folow= new FollowerTrip;
+			$folow->trip_id=$trip_id;
+			$folow->user_id=Auth::id();
+			$folow->save();
+			return redirect()->route('list_follow');
+		}
 	}
 	public function addRequestJoin($trip_id)
 	{
-		$join= new JoinerTrip;
-		$join->trip_id=$trip_id;
-		$join->user_id=Auth::id();
-		$join->agree=0;
-		$join->save();
-		return redirect()->route('show_trip_plan',$trip_id);
+		if(JoinerTrip::where('trip_id',$trip_id)->where('user_id',Auth::id())->first()!=null)
+			return redirect()->route('home');
+		else{
+			$join= new JoinerTrip;
+			$join->trip_id=$trip_id;
+			$join->user_id=Auth::id();
+			$join->agree=0;
+			$join->save();
+			return redirect()->route('show_trip_plan',$trip_id);
+		}
 	}
 
-	public function deleteFollow($trip_id,$user_id)
+	public function deleteFollow($trip_id)
 	{
-		FollowerTrip::where('trip_id',$trip_id)->where('user_id',$user_id)->delete();
+		FollowerTrip::where('trip_id',$trip_id)->where('user_id',Auth::id())->delete();
 		return redirect()->route('show_trip_plan',$trip_id);
 	}
 
