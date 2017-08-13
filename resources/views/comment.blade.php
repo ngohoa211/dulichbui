@@ -10,6 +10,19 @@
     <div id="content" class="space-top-none">
         <div class="main-content">
             <div class="space60">&nbsp;</div>
+            <div class="row">
+                <div class="col-sm-1">
+                    <div class="dropdown">
+                      <button class="btn btn-basic dropdown-toggle" type="button" data-toggle="dropdown">Xem...
+                      <span class="caret"></span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="{{url('/trip_home/plan/'.$trip_id)}}">Kế Hoạch</a></li>
+                        <li><a href="{{route('get.comment',$trip_id)}}">Comment</a></li>
+                        <li><a href="{{route('show_member',$trip_id)}}">Danh sách thành viên</a></li>
+                      </ul>
+                    </div>
+                </div>
+            </div>
             <!-- Cover of trip -->
             <!-- <img src="{{asset('source/assets/dest/images/related/3.jpg')}}" width="100%" height="300" > -->
              <div class="space60">&nbsp;</div>
