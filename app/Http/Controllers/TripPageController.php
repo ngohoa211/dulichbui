@@ -75,25 +75,32 @@ class TripPageController extends Controller
 		return $permission;
 	}
 	public function editPlan($trip_id){
-
+		dd($trip_id);
 	}
-	public function addFollow($trip_id,$user_id)
+	public function addFollow($trip_id)
 	{
-
-		$folow= new FollowerTrip;
-		$folow->trip_id=$trip_id;
-		$folow->user_id=$user_id;
-		$folow->save();
-		return redirect()->route('list_follow');
+		if(FollowerTrip::where('trip_id',$trip_id)->where('user_id',Auth::id())->first()!=null)
+			return redirect()->route('home');
+		else{
+			$folow= new FollowerTrip;
+			$folow->trip_id=$trip_id;
+			$folow->user_id=Auth::id();
+			$folow->save();
+			return redirect()->route('list_follow');
+		}
 	}
 	public function addRequestJoin($trip_id)
 	{
-		$join= new JoinerTrip;
-		$join->trip_id=$trip_id;
-		$join->user_id=Auth::id();
-		$join->agree=0;
-		$join->save();
-		return redirect()->route('show_trip_plan',$trip_id);
+		if(JoinerTrip::where('trip_id',$trip_id)->where('user_id',Auth::id())->first()!=null)
+			return redirect()->route('home');
+		else{
+			$join= new JoinerTrip;
+			$join->trip_id=$trip_id;
+			$join->user_id=Auth::id();
+			$join->agree=0;
+			$join->save();
+			return redirect()->route('show_trip_plan',$trip_id);
+		}
 	}
 
 	public function deleteFollow($trip_id)

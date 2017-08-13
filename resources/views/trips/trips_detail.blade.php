@@ -27,7 +27,7 @@
 								@if( (in_array("folowed",$permission)==false))
 								<div class="col-sm-1">
 									<button type="button" class="btn btn-success">
-										<a href="{{url('/trip_home/addFolow/'.$trip->id.'/'.Auth::user()->id)}}" style="color: black">Follow</a>
+										<a href="{{url('/trip_home/addFolow/'.$trip->id)}}" style="color: black">Follow</a>
 									</button>
 								</div>
 								@endif
@@ -63,6 +63,11 @@
 							</div>
 							@endif
 							@if(in_array("owner",$permission))
+							<div class="col-sm-1">
+								<button type="button" class="btn btn-success">
+								<a href="{{route('edit_trip_plan',$trip->id)}}" style="color: black">Edit</a>
+								</button>
+							</div>
 							<div class="col-sm-3">
 								<h5>(Chuyến này do bạn quản lý)</h5>
 							</div>

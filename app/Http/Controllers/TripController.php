@@ -47,8 +47,6 @@ class TripController extends Controller
       $trip->place_gather=$array_input['place_gather'];
       $trip->save();
 
-      
-
       $owner_this_trip = new OwnerTrip;
       $owner_this_trip->user_id = Auth::id();
       $owner_this_trip->trip_id = $trip->id;
