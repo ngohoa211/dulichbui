@@ -131,6 +131,17 @@
 		</div> <!-- #content -->
 	</div> <!-- .container -->
 </div>
-
+<script type="text/javascript">
+	$( document ).ready(function() {
+//sau khi tai xong. thuc hien:
+	//add button 
+	c_mapping.buttonId_number_current=1;
+	$('#tripinfo').append(v_button_add.addButton(c_mapping.buttonId_number_current));
+	c_mapping.buttonId_number_current=c_mapping.numbers_button;
+	c_mapping.button_type = 'add';
+	//add su kien click vao button
+	c_event.addClickEventForButtonAdd($('#button'+c_mapping.buttonId_number_current));
+	});
+</script>
 
 @stop

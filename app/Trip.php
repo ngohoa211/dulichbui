@@ -23,14 +23,20 @@ class Trip extends Model
 
     public function parts()
     {
-        return $this->hasMany('App\Part');
+        return $this->hasMany('App\Part')->orderBy('status','ASC');
     }
 
     public function scopeGetAllTrip($query)
     {
         return $query->get();
     }
-
+    public function scopeGetTripAndCover($query,$trip_id){
+        return $query->join('pictures', 'trips.id', '=', 'pictures.trip_id')
+        ->where('pictures.comment_id',null)
+        ->where('trips.id',$trip_id)
+        ->select('trips.id','name','url','start_date','end_date','place_gather')
+        ->first();
+    }
     public function scopeGetAllTripNew($query)
     {
         return $query->join('pictures', 'trips.id', '=', 'pictures.trip_id')

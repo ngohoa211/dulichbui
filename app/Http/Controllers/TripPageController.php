@@ -18,8 +18,10 @@ use View;
 class TripPageController extends Controller
 {
 	public function showPage($trip_id){
+		$trip=Trip::getTripAndCover($trip_id);
+		
 		$permission = $this->getPermission(Auth::id(), $trip_id);
-		return view('trips.trips_detail',['permission'=>$permission],['trip_id'=>$trip_id]);
+		return view('trips.trips_detail',['permission'=>$permission],['trip'=>$trip]);
 	}
 	public function show_member($trip_id){
 		$joiners = array();

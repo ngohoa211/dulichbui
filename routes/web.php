@@ -20,38 +20,38 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/register', 'Auth\RegisterController@create')->name('register');
 
-
 Route::get('/alltrip','AllTripController@listAllTrip')->name('alltrip');
-
-Route::get('/profile','UserpageController@getProfile')->name('profile');
-Route::get('/edit_profile','UserpageController@getEditProfile')->name('get.edit.profile');
-Route::post('/edit_profile','UserpageController@postEditProfile')->name('post.edit.profile');
-Route::get('/create_new_trip','TripController@showFormCreateTrip')->name('form_create_trip');
-//check auth
-Route::post('/create_new_trip','TripController@CreateTrip')->name('create_new_trip');
-
+Route::middleware('auth')->group(function () {
+	Route::get('/profile','UserpageController@getProfile')->name('profile');
+	Route::get('/edit_profile','UserpageController@getEditProfile')->name('get.edit.profile');
+	Route::post('/edit_profile','UserpageController@postEditProfile')->name('post.edit.profile');
+	Route::get('/create_new_trip','TripController@showFormCreateTrip')->name('form_create_trip');
+	Route::post('/create_new_trip','TripController@CreateTrip')->name('create_new_trip');
+	Route::get('/list_join','UserpageController@listTripJoin')->name('list_join');
+	Route::get('/list_follow', 'UserpageController@listTripFolow')->name('list_follow');
+	Route::get('/list_my_create', 'UserpageController@listTripCreate')->name('list_my_create');
+	Route::get('/trip_home/plan/{trip_id}/edit', 'TripPageController@editPlan')->name('edit_trip_plan');
+	Route::get('/trip_home/addFolow/{trip_id}/{user_id}', 'TripPageController@addFollow')->name('add_follow');
+	Route::get('/trip_home/add_request_join/{trip_id}', 'TripPageController@addRequestJoin')->name('add_request_join');
+	Route::get('/trip_home/delete_request_join/{trip_id}', 'TripPageController@deleteRequestJoin')->name('delete_request_join');
+	Route::get('/trip_home/deleteFollow/{trip_id}','TripPageController@deleteFollow')->name('delete_follow');
+	Route::get('/trip_home/quit_trip/{trip_id}','TripPageController@quitTrip')->name('quit_trip');
+	Route::post('/trip_home/comment/{trip_id}','CommentController@post_comment')->name('post.comment');
+	Route::post('/rep_comment/{trip_id}/{father_id}','CommentController@post_rep_comment')->name('post.rep.comment');
+});
+//check xem trip nay co ton tai. neu khong phai reroute ve home co nhieu cai tren nua cung can add midder nay.
 Route::get('/trip_home/plan/{trip_id}', 'TripPageController@showPage')->name('show_trip_plan');
-Route::get('/trip_home/plan/{trip_id}/edit', 'TripPageController@editPlan')->name('edit_trip_plan');
-Route::get('/list_join','UserpageController@listTripJoin')->name('list_join');
-Route::get('/list_follow', 'UserpageController@listTripFolow')->name('list_follow');
-Route::get('/list_my_create', 'UserpageController@listTripCreate')->name('list_my_create');
+//
+
 
 Route::get('/trip_home/list_member/{trip_id}', 'TripPageController@show_member')->name('show_member');
-Route::get('/trip_home/addFolow/{trip_id}/{user_id}', 'TripPageController@addFollow')->name('add_follow');
-Route::get('/trip_home/add_request_join/{trip_id}', 'TripPageController@addRequestJoin')->name('add_request_join');
-Route::get('/trip_home/delete_request_join/{trip_id}', 'TripPageController@deleteRequestJoin')->name('delete_request_join');
-Route::get('/trip_home/deleteFollow/{trip_id}','TripPageController@deleteFollow')->name('delete_follow');
-Route::get('/trip_home/quit_trip/{trip_id}','TripPageController@quitTrip')->name('quit_trip');
-//them midderwate check co phai quan li khong vao day
+
+//them midderwate check co phai quan li khong vao day. va check xem user id co ton tai va trip id co ton tai
 Route::get('/trip_home/list_member/add_mem/{trip_id}/{user_id}', 'TripController@addMember')->name('add_member');
 Route::get('/trip_home/list_member/delete_request/{trip_id}/{user_id}', 'TripController@deleteRequest')->name('delete_request');
 Route::get('/trip_home/list_member/delete_member/{trip_id}/{user_id}', 'TripController@deleteJoiner')->name('delete_member');
 //
 Route::get('/trip_home/comment/{trip_id}','CommentController@get_comment')->name('get.comment');
-Route::post('/trip_home/comment/{trip_id}','CommentController@post_comment')->name('post.comment');
-
-Route::post('/rep_comment/{trip_id}/{father_id}','CommentController@post_rep_comment')->name('post.rep.comment');
-
 
 Route::get('demo', function () {
 	return view('js_demo.demo');
