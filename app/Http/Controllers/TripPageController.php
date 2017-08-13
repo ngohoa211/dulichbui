@@ -74,9 +74,7 @@ class TripPageController extends Controller
 		array_push ($permission,'watch');
 		return $permission;
 	}
-	public function editPlan($trip_id){
-		dd($trip_id);
-	}
+	
 	public function addFollow($trip_id)
 	{
 		if(FollowerTrip::where('trip_id',$trip_id)->where('user_id',Auth::id())->first()!=null)
