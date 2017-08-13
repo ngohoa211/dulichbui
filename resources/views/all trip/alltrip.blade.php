@@ -18,7 +18,7 @@
                                 <div class="col-sm-3">
                                     <div class="single-item">
                                         <div class="single-item-header">                                        
-                                            <a href="{{route('show_trip_plan',$trip->id)}}"><img src="{{$trip->coverimg}}" alt="" width="270" height="320" ></a>
+                                            <a href="{{route('show_trip_plan',$trip->id)}}"><img src="{{$trip->url}}" alt="" width="270" height="320" ></a>
                                         </div>
                                         <div class="single-item-body">
                                             <p>{{$trip->name}}</p>

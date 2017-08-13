@@ -62,7 +62,7 @@ class TripController extends Controller
                              function($key) use ($searchword) { return preg_match("/$searchword/", $key); },
                               ARRAY_FILTER_USE_KEY
                               );
-            
+            if($matches['nameblocks']==null) continue;
             $part ->status = $status_part;
             $part ->name = $matches[$block.'vitri'];
             $part ->latitude = $matches[$block.'latitude'];

@@ -28,7 +28,10 @@ class Trip extends Model
 
     public function scopeGetAllTrip($query)
     {
-        return $query->get();
+        return $query->join('pictures', 'trips.id', '=', 'pictures.trip_id')
+            ->where('pictures.comment_id',null)
+            ->select('trips.id','name','url')
+            ->get();
     }
     public function scopeGetTripAndCover($query,$trip_id){
         return $query->join('pictures', 'trips.id', '=', 'pictures.trip_id')
