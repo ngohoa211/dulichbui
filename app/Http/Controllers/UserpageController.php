@@ -8,15 +8,12 @@ use Illuminate\Support\Facades\Auth;
 use Hash;
 class UserpageController extends Controller
 {
-    //
+    //lấy thông tin người dùng trong database và đưa ra view
     public function getProfile(){
     	$profile = Auth::user();
     	return view('user_page.profile')->with('profile',$profile);
     }
-     // public function getEditProfile(){
-     //     $edit_pro=Auth::user()->id;
-     //     return view('user_page.profile')->with('edit_pro',$edit_pro);
-     // }
+    //xử lý yêu cầu  post của edit profile
     public function postEditProfile(Request $request){
         $this->validate($request,[
                'name' => 'required|string|max:255',
@@ -28,6 +25,7 @@ class UserpageController extends Controller
                 // 'password.required' =>'Không được bỏ trống password mới',
                 // 'email.unique' => ' email bị trùng '
           ]);    
+        //check password cũ có đúng
         if(Hash::check($request->input('password'), Auth::user()->password)==false){
             return redirect()->back()->withInput()->withErrors(['pass' => 'wrong old password']);
         }
@@ -42,15 +40,15 @@ class UserpageController extends Controller
         $edit_pro->save();
         return redirect()->route('profile');
     }
+    //đưa ra các trip đang tham gia
     public function listTripJoin(){
-    	
     	$user = Auth::user();
     	$list=$user->listJoinTrips();
     	return view('user_page.listTrip')
     	->with('list',$list)
     	->with('name_page','List trip i join in');
     }
-
+    // đưa ra các trip đang follow
     public function listTripFolow(){
     	$user = Auth::user();
     	$list=$user->listFollowTrips();
@@ -58,7 +56,7 @@ class UserpageController extends Controller
     	->with('list',$list)
     	->with('name_page','List trip i followed');
     }
-
+    // đưa ra các trip đã tạo
     public function listTripCreate(){
     	$user = Auth::user();
     	$list=$user->listOwnTrips();
@@ -66,5 +64,4 @@ class UserpageController extends Controller
     	->with('list',$list)
     	->with('name_page','List trip i created');
     }
-    // $user_id=Auth::id();
 }

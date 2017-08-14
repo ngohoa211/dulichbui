@@ -14,14 +14,15 @@ use View;
 
 class CommentController extends Controller
 {
-    //
+    //đưa dữ liệu comment vào database
   public function post_comment(Request $request,$trip_id){
-       // $trip= Trip::find($id);//tìm id của trip hiện đang commen
+    //lưu nội dung
     $comment= new Comment;
     $comment->user_id=Auth::user()->id; 
     $comment->trip_id=$trip_id;
     $comment->content=$request->content;
     $comment->save();
+    //lưu ảnh
        if(Input::hasFile('fImages')){
         foreach (Input::file('fImages') as $file) {
         $image = new Picture();
@@ -39,6 +40,7 @@ class CommentController extends Controller
 
     return redirect()->route('get.comment',$trip_id);
   }
+  //lấy ra các comment và coment con trong database đưa ra view
   public function get_comment(Request $request, $trip_id){
     $comment = Comment::where('trip_id',$trip_id)->get();
     
@@ -57,6 +59,7 @@ class CommentController extends Controller
     ->with('trip_id',$trip_id)
     ;
   }
+
    public function get_rep_comment(){
     $comment = Comment::all();
     $rep_comment =Comment::where('father_id','<>',0)->get();
@@ -69,30 +72,31 @@ class CommentController extends Controller
     ->with('rep_comment',$rep_comment)
     ;
   } 
-      public function post_rep_comment(Request $request,$trip_id,$father_id){
-       $rep_comment= new Comment;
-       $rep_comment->father_id=$father_id;
-       $rep_comment->user_id= Auth::user()->id; 
-       $rep_comment->trip_id= $trip_id;
-       $rep_comment->content=$request->content;
-       $rep_comment->save(); 
-       if(Input::hasFile('repImages')){
-        foreach (Input::file('repImages') as $rep_file) {
-          $img = new Picture();
-          if(isset($rep_file)){
-            $rep_img_name=Carbon::now()->format('YmdHs').$rep_file->getClientOriginalName();
-            $img->url='source/assets/dest/images/comments/'.$rep_img_name;
-            $img->user_id=Auth::user()->id; 
-            $img->trip_id=$trip_id;
-            $img->comment_id = $rep_comment->id;
-            $rep_file->move('source/assets/dest/images/comments/',$rep_img_name);
-            $img->save();    
-          }
+  
+    public function post_rep_comment(Request $request,$trip_id,$father_id){
+     $rep_comment= new Comment;
+     $rep_comment->father_id=$father_id;
+     $rep_comment->user_id= Auth::user()->id; 
+     $rep_comment->trip_id= $trip_id;
+     $rep_comment->content=$request->content;
+     $rep_comment->save(); 
+     if(Input::hasFile('repImages')){
+      foreach (Input::file('repImages') as $rep_file) {
+        $img = new Picture();
+        if(isset($rep_file)){
+          $rep_img_name=Carbon::now()->format('YmdHs').$rep_file->getClientOriginalName();
+          $img->url='source/assets/dest/images/comments/'.$rep_img_name;
+          $img->user_id=Auth::user()->id; 
+          $img->trip_id=$trip_id;
+          $img->comment_id = $rep_comment->id;
+          $rep_file->move('source/assets/dest/images/comments/',$rep_img_name);
+          $img->save();    
         }
       }
-      
-        return redirect()->route('get.comment',$trip_id);
-  }
+    }
+    
+      return redirect()->route('get.comment',$trip_id);
+}
 
 }
 

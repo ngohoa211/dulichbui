@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Auth;
 
 class TripController extends Controller
 {
+
     public function showFormCreateTrip(Request $request){
       return view('trips.trips_create');
     }
+    //xử lý post khi tạo 1 trip. lưu vào database
     public function CreateTrip(Request $request){
     	//create trip then add part
     	//lay ten cac block
@@ -83,7 +85,7 @@ class TripController extends Controller
 
       return redirect('/trip_home/plan/'.$trip->id);
     }
-
+    //owner thêm member đã đăng kí join.
     public function addMember(Request $request,$trip_id,$user_id){
         $request_join=JoinerTrip::where('user_id',$user_id)->where('agree',0)->first();
         if($request_join!=null){
@@ -92,29 +94,29 @@ class TripController extends Controller
         }
         return redirect()->route('show_member',$trip_id);
     }
-
+    //owner xóa yêu cầu tham gia trip
     public function deleteRequest(Request $request,$trip_id,$user_id){
         JoinerTrip::where('user_id',$user_id)->where('agree',0)->delete();
         return redirect()->route('show_member',$trip_id);
     }
-
+    //owner xóa 1 user khỏi danh sách mem của trip
     public function deleteJoiner(Request $request,$trip_id,$user_id){
         JoinerTrip::where('user_id',$user_id)->where('agree',1)->delete();
         return redirect()->route('show_member',$trip_id);
     }
-
+    //hiện view edit cho người dùng nhập
     public function editPlan($trip_id){
           $trips=Trip::getTripAndCover($trip_id);
-          // if($trip->parts->isEmpty()) dd('he');
           return view('trips.trip_plan_edit')->with('trip',$trips);
     }
+    //xử lý post của edit plan
     public function doEditPlan(Request $request,$trip_id){
          $this->validate($request,[
                'name' => 'required',
                'start_date' => 'required',
                'end_date' => 'required',
 
-               // 'end_bet_time' => 'before:start_time',
+               // 'end_time' => 'before:start_time',
           ],[
                 'name.required' => ' Không được bỏ trống tên chuyến đi',
                 'start_date.required' => ' Không được bỏ trống thời gian dự kiến bắt đầu ',
@@ -123,19 +125,16 @@ class TripController extends Controller
 
         $array_input=Input::all();
         $blocks=explode(" ",$array_input['nameblocks']);
-
         $trip=Trip::find($trip_id);
         $trip->name=$array_input['name'];
         $trip->start_date=$array_input['start_date'];
         $trip->end_date=$array_input['end_date'];
         $trip->place_gather=$array_input['place_gather'];
         $trip->save();
-
         //xoa het cac part cu
         foreach ($trip->parts as $pa) {
           $pa->delete();
         }
-
         //them part moi vao
         if(empty($array_input['nameblocks'])==false){
           $status_part = 0;

@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+
     }
 
     /**
@@ -22,6 +22,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //lấy hot, new trip trả về home. hot dựa vào số lượng comment. new dựa vào ngày tạo created_at
     public function index()
     {
          $new_trips=Trip::getAllTripNew();
