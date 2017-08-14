@@ -127,7 +127,7 @@
 										</div>
 										<div class="your-order-item">
 
-											<img src="{{asset($trip->url)}}" alt="" width="270" height="320" ></a>
+											<img src="{{asset($trip->url)}}" alt="" width="270" height="320" >
 
 										</div>
 									</div>

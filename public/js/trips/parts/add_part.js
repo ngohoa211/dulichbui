@@ -55,6 +55,7 @@ var c_mapping = {
 	"button_type":null,
 	"numbers_button":0,
 	"prepare" : function(){
+		console.log(m_arrayPoint.length);
 		c_mapping.combineData();
 		c_mapping.namming();
 
@@ -70,8 +71,8 @@ var c_mapping = {
     												+'<input type="hidden" class="form-control" id="longtitude" value="'+m_arrayPoint[index].mark.getPosition().lng()+'">'
   												+'</div>');
 			}else {
-				m_arrayPoint[index].element.find('#latitude').val()=m_arrayPoint[index].mark.getPosition().lat();
-				m_arrayPoint[index].element.find('#longtitude').val()=m_arrayPoint[index].mark.getPosition().lat();
+				m_arrayPoint[index].element.find('#latitude').val(m_arrayPoint[index].mark.getPosition().lat().toString());
+				m_arrayPoint[index].element.find('#longtitude').val(m_arrayPoint[index].mark.getPosition().lng().toString());
 			}
 		}
 		//them ten cac block vao dau form
@@ -278,7 +279,7 @@ var c_event = {
 		button.click(function(){
 			var markindex =-1;
 			for (index = 0; index < m_arrayPoint.length; ++index){
-				
+				//tim diem tren ban do co vi tri tuong ung voi diem muon xoa
 				if(m_arrayPoint[index].element.attr('id')==button.parent().attr('id')){
 					m_arrayPoint[index].mark.setMap(null);
 					markindex= index;

@@ -31,7 +31,9 @@ Route::middleware('auth')->group(function () {
 	Route::get('/list_follow', 'UserpageController@listTripFolow')->name('list_follow');
 	Route::get('/list_my_create', 'UserpageController@listTripCreate')->name('list_my_create');
 
-	Route::get('/trip_home/plan/{trip_id}/edit', 'TripPageController@editPlan')->name('edit_trip_plan')
+	Route::get('/trip_home/plan/{trip_id}/edit', 'TripController@editPlan')->name('edit_trip_plan')
+	->middleware('check_exist_trip','check_is_owner');
+	Route::post('/trip_home/plan/{trip_id}/edit', 'TripController@doEditPlan')->name('do_edit_trip_plan')
 	->middleware('check_exist_trip','check_is_owner');
 	Route::get('/trip_home/addFolow/{trip_id}', 'TripPageController@addFollow')->name('add_follow')
 	->middleware('check_exist_trip');
